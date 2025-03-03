@@ -25,6 +25,9 @@ $Getuser_id = $_GET['uid'];
                 <li class="nav-item">
                     <a class="nav-link" href="index.php?uid=<?php echo $Getuser_id ?>">View Names</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="rota.php?uid=<?php echo $Getuser_id ?>">Rota</a>
+                </li>
             </ul>
         </div>
     </div>

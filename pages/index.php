@@ -30,7 +30,7 @@ $Getuser_id = $_GET['uid'];
                         <a class="nav-link" href="add_name.php?uid=<?php echo $Getuser_id ?>">Add Name</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="?uid=<?php echo $Getuser_id ?>">Item2</a>
+                        <a class="nav-link" href="rota.php?uid=<?php echo $Getuser_id ?>">Rota</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="?uid=<?php echo $Getuser_id ?>">Item3</a>
