@@ -82,6 +82,22 @@ $Getuser_id = $_GET['uid'];
                 </div>
                 <div class="card-body" id="monday_card">
                     <h3>People Working:</h3>
+                    <?php
+                    //show saved names
+                    $get_names_sql = "SELECT first_name , last_name 
+                    FROM employee 
+                    INNER JOIN day_availability 
+                    ON employee.employee_id = day_availability.employee_id 
+                    WHERE day_availability.monday = True";
+                    $result = mysqli_query($conn, $get_names_sql);
+
+                    while ($row = mysqli_fetch_assoc($result)) {
+                        //get value associated with that row and column
+                        $first_name = $row['first_name'];
+                        $last_name = $row['last_name'];
+                        echo "<p>$first_name $last_name</p>";
+                    }
+                    ?>
                 </div>
                 <div class="card-footer"></div>
             </div>
@@ -92,6 +108,22 @@ $Getuser_id = $_GET['uid'];
                 </div>
                 <div class="card-body" id="tuesday_card">
                     <h3>People Working:</h3>
+                    <?php
+                    //show saved names
+                    $get_names_sql = "SELECT first_name , last_name 
+                    FROM employee 
+                    INNER JOIN day_availability 
+                    ON employee.employee_id = day_availability.employee_id 
+                    WHERE day_availability.tuesday = True";
+                    $result = mysqli_query($conn, $get_names_sql);
+
+                    while ($row = mysqli_fetch_assoc($result)) {
+                        //get value associated with that row and column
+                        $first_name = $row['first_name'];
+                        $last_name = $row['last_name'];
+                        echo "<p>$first_name $last_name</p>";
+                    }
+                    ?>
                 </div>
                 <div class="card-footer"></div>
             </div>
@@ -102,6 +134,22 @@ $Getuser_id = $_GET['uid'];
                 </div>
                 <div class="card-body" id="wednesday_card">
                     <h3>People Working:</h3>
+                    <?php
+                    //show saved names
+                    $get_names_sql = "SELECT first_name , last_name 
+                    FROM employee 
+                    INNER JOIN day_availability 
+                    ON employee.employee_id = day_availability.employee_id 
+                    WHERE day_availability.wednesday = True";
+                    $result = mysqli_query($conn, $get_names_sql);
+
+                    while ($row = mysqli_fetch_assoc($result)) {
+                        //get value associated with that row and column
+                        $first_name = $row['first_name'];
+                        $last_name = $row['last_name'];
+                        echo "<p>$first_name $last_name</p>";
+                    }
+                    ?>
                 </div>
                 <div class="card-footer"></div>
             </div>
@@ -112,6 +160,22 @@ $Getuser_id = $_GET['uid'];
                 </div>
                 <div class="card-body" id="thursday_card">
                     <h3>People Working:</h3>
+                    <?php
+                    //show saved names
+                    $get_names_sql = "SELECT first_name , last_name 
+                    FROM employee 
+                    INNER JOIN day_availability 
+                    ON employee.employee_id = day_availability.employee_id 
+                    WHERE day_availability.thursday = True";
+                    $result = mysqli_query($conn, $get_names_sql);
+
+                    while ($row = mysqli_fetch_assoc($result)) {
+                        //get value associated with that row and column
+                        $first_name = $row['first_name'];
+                        $last_name = $row['last_name'];
+                        echo "<p>$first_name $last_name</p>";
+                    }
+                    ?>
                 </div>
                 <div class="card-footer"></div>
             </div>
@@ -122,6 +186,22 @@ $Getuser_id = $_GET['uid'];
                 </div>
                 <div class="card-body" id="friday_card">
                     <h3>People Working:</h3>
+                    <?php
+                    //show saved names
+                    $get_names_sql = "SELECT first_name , last_name 
+                    FROM employee 
+                    INNER JOIN day_availability 
+                    ON employee.employee_id = day_availability.employee_id 
+                    WHERE day_availability.friday = True";
+                    $result = mysqli_query($conn, $get_names_sql);
+
+                    while ($row = mysqli_fetch_assoc($result)) {
+                        //get value associated with that row and column
+                        $first_name = $row['first_name'];
+                        $last_name = $row['last_name'];
+                        echo "<p>$first_name $last_name</p>";
+                    }
+                    ?>
                 </div>
                 <div class="card-footer"></div>
             </div>
@@ -132,6 +212,22 @@ $Getuser_id = $_GET['uid'];
                 </div>
                 <div class="card-body" id="saturday_card">
                     <h3>People Working:</h3>
+                    <?php
+                    //show saved names
+                    $get_names_sql = "SELECT first_name , last_name 
+                    FROM employee 
+                    INNER JOIN day_availability 
+                    ON employee.employee_id = day_availability.employee_id 
+                    WHERE day_availability.saturday = True";
+                    $result = mysqli_query($conn, $get_names_sql);
+
+                    while ($row = mysqli_fetch_assoc($result)) {
+                        //get value associated with that row and column
+                        $first_name = $row['first_name'];
+                        $last_name = $row['last_name'];
+                        echo "<p>$first_name $last_name</p>";
+                    }
+                    ?>
                 </div>
                 <div class="card-footer"></div>
             </div>
@@ -142,6 +238,22 @@ $Getuser_id = $_GET['uid'];
                 </div>
                 <div class="card-body" id="sunday_card">
                     <h3>People Working:</h3>
+                    <?php
+                    //show saved names
+                    $get_names_sql = "SELECT first_name , last_name 
+                    FROM employee 
+                    INNER JOIN day_availability 
+                    ON employee.employee_id = day_availability.employee_id 
+                    WHERE day_availability.sunday = True";
+                    $result = mysqli_query($conn, $get_names_sql);
+
+                    while ($row = mysqli_fetch_assoc($result)) {
+                        //get value associated with that row and column
+                        $first_name = $row['first_name'];
+                        $last_name = $row['last_name'];
+                        echo "<p>$first_name $last_name</p>";
+                    }
+                    ?>
                 </div>
                 <div class="card-footer"></div>
             </div>
