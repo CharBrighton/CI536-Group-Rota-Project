@@ -1,0 +1,59 @@
+.wrapper {
+    max-width: 110em;
+    margin: 0 auto;
+
+    display: grid;
+    grid-template-areas:
+    "topnav topnav topnav topnav topnav topnav topnav"
+    "main main main main main main main"
+    "monday tuesday wednesday thursday friday saturday sunday";
+}
+.topnav {
+    grid-area: topnav;
+
+}
+.main {
+    grid-area: main;
+}
+.monday{
+    grid-area: monday;
+    border-color: red;
+    border-style: solid;
+}
+.tuesday{
+    grid-area: tuesday;
+    border-color: green;
+    border-style: solid;
+}
+.wednesday{
+    grid-area: wednesday;
+    border-color: blue;
+    border-style: solid;
+}
+.thursday{
+    grid-area: thursday;
+    border-color: yellow;
+    border-style: solid;
+}
+.friday{
+    grid-area: friday;
+    border-color: orange;
+    border-style: solid;
+}
+.saturday{
+    grid-area: saturday;
+    border-color: saddlebrown;
+    border-style: solid;
+}
+.sunday{
+    grid-area: sunday;
+    border-color: purple;
+    border-style: solid;
+}
+
+#prev{
+    display: inline;
+}
+#next{
+    display: inline;
+}

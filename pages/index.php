@@ -33,7 +33,7 @@ $Getuser_id = $_GET['uid'];
                         <a class="nav-link" href="rota.php?uid=<?php echo $Getuser_id ?>">Rota</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="?uid=<?php echo $Getuser_id ?>">Item3</a>
+                        <a class="nav-link" href="addtorota.php?uid=<?php echo $Getuser_id ?>">Add To Rota</a>
                     </li>
                 </ul>
                 <form class="d-flex" method="post">
