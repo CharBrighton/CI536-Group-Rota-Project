@@ -18,6 +18,8 @@ $Getuser_id = $_GET['uid'];
         <link href="../css/rota.css" rel="stylesheet">
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
         <script src="../js/rota.js"></script>
+        <script src="../js/rota2.js"></script>
+        <script src="../js/moment.js"></script>
     </head>
 
     <body>
@@ -53,6 +55,7 @@ $Getuser_id = $_GET['uid'];
         <div class="main">
             <button id="prev">&#8249;</button>
             <button id="next">&#8250;</button>
+            <button id="today">Today</button>
 
             <div id="month">
                 <h2 id="month"></h2>
@@ -61,31 +64,31 @@ $Getuser_id = $_GET['uid'];
 
         <div class="monday">
             <p id="1">Monday</p>
-            <p id="mon_date"></p>
+            <p id="Mon_date"></p>
         </div>
         <div class="tuesday">
             <p id="2">Tuesday</p>
-            <p id="tue_date"></p>
+            <p id="Tue_date"></p>
         </div>
         <div class="wednesday">
             <p id="3">Wednesday</p>
-            <p id="wed_date"></p>
+            <p id="Wed_date"></p>
         </div>
         <div class="thursday">
             <p id="4">Thursday</p>
-            <p id="thu_date"></p>
+            <p id="Thu_date"></p>
         </div>
         <div class="friday">
             <p id="5">Friday</p>
-            <p id="fri_date"></p>
+            <p id="Fri_date"></p>
         </div>
         <div class="saturday">
             <p id="6">Saturday</p>
-            <p id="sat_date"></p>
+            <p id="Sat_date"></p>
         </div>
         <div class="sunday">
             <p id="7">Sunday</p>
-            <p id="sun_date"></p>
+            <p id="Sun_date"></p>
         </div>
 
 
