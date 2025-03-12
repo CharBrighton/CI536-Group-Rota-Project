@@ -4,6 +4,7 @@
 global $conn;
 include "../conn/conn.php";
 include '../logic/rotalogic.php';
+include '../logic/getshiftsforday.php';
 
 $Getuser_id = $_GET['uid'];
 ?>
@@ -99,6 +100,8 @@ $Getuser_id = $_GET['uid'];
                 <h3>People Available:</h3>
                 <?php
                 dayavailable('tuesday');
+
+                shifts('2025-3-12');
                 ?>
             </div>
             <div class="card-footer"></div>

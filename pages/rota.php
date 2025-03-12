@@ -4,6 +4,7 @@
 global $conn;
 include "../conn/conn.php";
 include '../logic/rotalogic.php';
+include '../logic/getshiftsforday.php';
 
 $Getuser_id = $_GET['uid'];
 ?>
@@ -66,30 +67,43 @@ $Getuser_id = $_GET['uid'];
     <div class="monday" id="monday">
         <p id="1">Monday</p>
         <p id="Mon_date"></p>
+        <h3>Monday Shifts</h3>
+        <div id="mon_results">
+        <?php
+        $date = '2025-3-12';
+        shifts($date);
+        ?>
+        </div>
     </div>
     <div class="tuesday" id="tuesday">
         <p id="2">Tuesday</p>
         <p id="Tue_date"></p>
+        <h3>Tuesday Shifts</h3>
     </div>
     <div class="wednesday" id="wednesday">
         <p id="3">Wednesday</p>
         <p id="Wed_date"></p>
+        <h3>Wednesday Shifts</h3>
     </div>
     <div class="thursday" id="thursday">
         <p id="4">Thursday</p>
         <p id="Thu_date"></p>
+        <h3>Thursday Shifts</h3>
     </div>
     <div class="friday" id="friday">
         <p id="5">Friday</p>
         <p id="Fri_date"></p>
+        <h3>Friday Shifts</h3>
     </div>
     <div class="saturday" id="saturday">
         <p id="6">Saturday</p>
         <p id="Sat_date"></p>
+        <h3>Saturday Shifts</h3>
     </div>
     <div class="sunday" id="sunday">
         <p id="7">Sunday</p>
         <p id="Sun_date"></p>
+        <h3>Sunday Shifts</h3>
     </div>
 
 
