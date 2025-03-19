@@ -13,7 +13,6 @@ window.addEventListener('load', function (evt) {
     //next button adds 7 to all dates
     this.document.querySelector('#next').addEventListener('click', function (evt) {
         evt.preventDefault();
-        //removeshifts()
         modifier = modifier + 7;
         rotadates();
     });

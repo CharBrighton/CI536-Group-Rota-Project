@@ -74,7 +74,7 @@ $Getuser_id = $_GET['uid'];
                     let x = document.getElementById('Mon_date').getAttribute('data-value');
                     console.log(x);
 
-                    var dataToSend = "variableName=" + encodeURIComponent(x);
+                    var dataToSend = "date=" + encodeURIComponent(x);
                     // Prepare the data to send
                     var xhr = new XMLHttpRequest();
                     // Create a new XMLHttpRequest object
@@ -89,6 +89,9 @@ $Getuser_id = $_GET['uid'];
                                 // Check if the request was successful
                                 console.log(xhr.responseText);
                                 // Output the response from the PHP script
+                                const para = document.getElementById('mon_results');
+                                para.innerHTML = xhr.responseText;
+                                document.getElementById('mon_results').appendChild(para);
                             } else {
                                 console.error("Error:", xhr.status);
                                 // Log an error if the request was unsuccessful
@@ -97,12 +100,8 @@ $Getuser_id = $_GET['uid'];
                     };
                     xhr.send(dataToSend);
                     // Send the data to the PHP script
-                    },3000)
+                    },1000)
                 </script>
-
-            <?php
-
-            shifts('2025-3-17')?>
         </div>
     </div>
     <div class="tuesday" id="tuesday">

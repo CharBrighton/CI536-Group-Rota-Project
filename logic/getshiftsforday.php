@@ -2,12 +2,11 @@
 global $conn;
 include "../conn/conn.php";
 
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["variableName"])) {
-    $receivedVariable = $_POST["variableName"];
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["date"])) {
+    $receivedVariable = $_POST["date"];
     // Process the received variable here
-    echo "Received variable: " . $receivedVariable;
-} else {
-    echo "No data received";
+    $return = shifts($receivedVariable);
+    echo $return;
 }
 
 function shifts($date): void
@@ -29,8 +28,8 @@ function shifts($date): void
         $end_time = $row['end_time'];
         $break_time = $row['break_time'];
 
-        echo "<p>$first_name $last_name</p>";
-        echo "<p>Start: $start_time End: $end_time Break: $break_time</p>";
+        echo "<p>$first_name $last_name Start: $start_time End: $end_time Break: $break_time</p>";
+
     }
 }
 ?>
