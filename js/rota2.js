@@ -1,0 +1,4 @@
+function getdate(){
+
+    return x;
+}

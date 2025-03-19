@@ -69,10 +69,40 @@ $Getuser_id = $_GET['uid'];
         <p id="Mon_date"></p>
         <h3>Monday Shifts</h3>
         <div id="mon_results">
-        <?php
-        $date = '2025-3-12';
-        shifts($date);
-        ?>
+            <script>
+                setTimeout(function(){
+                    let x = document.getElementById('Mon_date').getAttribute('data-value');
+                    console.log(x);
+
+                    var dataToSend = "variableName=" + encodeURIComponent(x);
+                    // Prepare the data to send
+                    var xhr = new XMLHttpRequest();
+                    // Create a new XMLHttpRequest object
+                    xhr.open("POST", "../logic/getshiftsforday.php", true);
+                    // Specify the request method, PHP script URL, and asynchronous
+                    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                    // Set the content type
+                    xhr.onreadystatechange = function () {
+                        if (xhr.readyState === XMLHttpRequest.DONE) {
+                            // Check if the request is complete
+                            if (xhr.status === 200) {
+                                // Check if the request was successful
+                                console.log(xhr.responseText);
+                                // Output the response from the PHP script
+                            } else {
+                                console.error("Error:", xhr.status);
+                                // Log an error if the request was unsuccessful
+                            }
+                        }
+                    };
+                    xhr.send(dataToSend);
+                    // Send the data to the PHP script
+                    },3000)
+                </script>
+
+            <?php
+
+            shifts('2025-3-17')?>
         </div>
     </div>
     <div class="tuesday" id="tuesday">

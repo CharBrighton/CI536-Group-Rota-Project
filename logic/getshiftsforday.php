@@ -1,14 +1,17 @@
-
-
 <?php
 global $conn;
 include "../conn/conn.php";
 
-$text = $_POST['text'];
-$output = wordwrap($text, 60, "<br>");
-echo $output;
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["variableName"])) {
+    $receivedVariable = $_POST["variableName"];
+    // Process the received variable here
+    echo "Received variable: " . $receivedVariable;
+} else {
+    echo "No data received";
+}
 
-function shifts($date){
+function shifts($date): void
+{
     //show saved names
     global $conn;
     $get_shifts_sql = "SELECT first_name , last_name, start_time, end_time, break_time
@@ -25,6 +28,7 @@ function shifts($date){
         $start_time = $row['start_time'];
         $end_time = $row['end_time'];
         $break_time = $row['break_time'];
+
         echo "<p>$first_name $last_name</p>";
         echo "<p>Start: $start_time End: $end_time Break: $break_time</p>";
     }

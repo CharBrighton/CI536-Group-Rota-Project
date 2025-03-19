@@ -13,7 +13,7 @@ window.addEventListener('load', function (evt) {
     //next button adds 7 to all dates
     this.document.querySelector('#next').addEventListener('click', function (evt) {
         evt.preventDefault();
-        removeshifts()
+        //removeshifts()
         modifier = modifier + 7;
         rotadates();
     });
@@ -33,18 +33,6 @@ window.addEventListener('load', function (evt) {
                 results_div.removeChild(results_div.lastChild);
             }
         }
-    }
-
-    addshiftstoday();
-    function addshiftstoday(){
-        $.ajax({
-            method: "POST",
-            url: "../logic/getshiftsforday.php",
-            data: { text: "123" }
-        })
-            .done(function( response ) {
-                $("p.broken").html(response);
-            });
     }
 
     //add Month Year above the days
@@ -98,7 +86,10 @@ window.addEventListener('load', function (evt) {
         //adding dates to days of the week
         let monday = new Date(mon_date);
         monday.setDate(monday.getDate() + modifier);
-        document.getElementById('Mon_date').textContent = String(monday).slice(7, 10) + " " + String(monday).slice(4, 7) + " " + String(monday).slice(10, 15);
+        let m = document.getElementById('Mon_date');
+        m.textContent = String(monday).slice(7, 10) + " " + String(monday).slice(4, 7) + " " + String(monday).slice(10, 15);
+        m.setAttribute('data-value',monday.toISOString().split('T')[0]);
+
 
 
         let tuesday = new Date(mon_date);
@@ -123,7 +114,7 @@ window.addEventListener('load', function (evt) {
         document.getElementById('Sat_date').textContent = String(saturday).slice(7, 10) + " " + String(saturday).slice(4, 7) + " " + String(saturday).slice(10, 15);
 
         let sunday = new Date(mon_date);
-        sunday.setDate(sunday.getDate() + modifier + 6);;
+        sunday.setDate(sunday.getDate() + modifier + 6);
         document.getElementById('Sun_date').textContent = String(sunday).slice(7, 10) + " " + String(sunday).slice(4, 7) + " " + String(sunday).slice(10, 15);
     }
 
