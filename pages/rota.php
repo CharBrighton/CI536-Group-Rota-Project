@@ -69,70 +69,55 @@ $Getuser_id = $_GET['uid'];
         <p id="Mon_date"></p>
         <h3>Monday Shifts</h3>
         <div id="mon_results">
-            <script>
-                setTimeout(function(){
-                    let x = document.getElementById('Mon_date').getAttribute('data-value');
-                    console.log(x);
-
-                    var dataToSend = "date=" + encodeURIComponent(x);
-                    // Prepare the data to send
-                    var xhr = new XMLHttpRequest();
-                    // Create a new XMLHttpRequest object
-                    xhr.open("POST", "../logic/getshiftsforday.php", true);
-                    // Specify the request method, PHP script URL, and asynchronous
-                    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-                    // Set the content type
-                    xhr.onreadystatechange = function () {
-                        if (xhr.readyState === XMLHttpRequest.DONE) {
-                            // Check if the request is complete
-                            if (xhr.status === 200) {
-                                // Check if the request was successful
-                                console.log(xhr.responseText);
-                                // Output the response from the PHP script
-                                const para = document.getElementById('mon_results');
-                                para.innerHTML = xhr.responseText;
-                                document.getElementById('mon_results').appendChild(para);
-                            } else {
-                                console.error("Error:", xhr.status);
-                                // Log an error if the request was unsuccessful
-                            }
-                        }
-                    };
-                    xhr.send(dataToSend);
-                    // Send the data to the PHP script
-                    },1000)
-                </script>
         </div>
     </div>
     <div class="tuesday" id="tuesday">
         <p id="2">Tuesday</p>
         <p id="Tue_date"></p>
         <h3>Tuesday Shifts</h3>
+        <div id="tue_results">
+
+        </div>
     </div>
     <div class="wednesday" id="wednesday">
         <p id="3">Wednesday</p>
         <p id="Wed_date"></p>
         <h3>Wednesday Shifts</h3>
+        <div id="wed_results">
+
+        </div>
     </div>
     <div class="thursday" id="thursday">
         <p id="4">Thursday</p>
         <p id="Thu_date"></p>
         <h3>Thursday Shifts</h3>
+        <div id="thu_results">
+
+        </div>
     </div>
     <div class="friday" id="friday">
         <p id="5">Friday</p>
         <p id="Fri_date"></p>
         <h3>Friday Shifts</h3>
+        <div id="fri_results">
+
+        </div>
     </div>
     <div class="saturday" id="saturday">
         <p id="6">Saturday</p>
         <p id="Sat_date"></p>
         <h3>Saturday Shifts</h3>
+        <div id="sat_results">
+
+        </div>
     </div>
     <div class="sunday" id="sunday">
         <p id="7">Sunday</p>
         <p id="Sun_date"></p>
         <h3>Sunday Shifts</h3>
+        <div id="sun_results">
+
+        </div>
     </div>
 
 
