@@ -28,16 +28,6 @@ window.addEventListener('load', function (evt) {
         getdbshifts();
     });
 
-    function removeshifts() {
-        for (let i = 0; i<7; i++) {
-            const monstr = ["mon", "tue", "wed", "thu", "fri", "sat", "sun"];
-            const results_div = document.getElementById(monstr[i]+"_results");
-            while (results_div.firstChild) {
-                results_div.removeChild(results_div.lastChild);
-            }
-        }
-    }
-
     //add Month Year above the days
     function monthtext(date) {
         const month_strings = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];

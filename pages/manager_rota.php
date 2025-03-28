@@ -3,10 +3,8 @@
 //error_reporting(0);
 global $conn;
 include "../conn/conn.php";
-include '../logic/rotalogic.php';
 include '../logic/getshiftsforday.php';
 
-$Getuser_id = $_GET['uid'];
 ?>
 
 <!DOCTYPE html>
@@ -18,8 +16,8 @@ $Getuser_id = $_GET['uid'];
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="../css/rota.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="../js/rota.js"></script>
-    <script src="../js/rota2.js"></script>
+    <script src="../js/manager_rota.js"></script>
+    <script src="../js/manager_rota2.js"></script>
     <script src="../js/moment.js"></script>
 </head>
 
@@ -28,27 +26,16 @@ $Getuser_id = $_GET['uid'];
     <div class="topnav">
         <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
             <div class="container-fluid">
-                <a class="navbar-brand" href="index.php?uid=<?php echo $Getuser_id ?>">Logo</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#collapsibleNavbar">
+                <a class="navbar-brand" href="manager_index.php">Logo</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="collapsibleNavbar">
                     <ul class="navbar-nav me-auto">
                         <li class="nav-item">
-                            <a class="nav-link" href="add_name.php?uid=<?php echo $Getuser_id ?>">Add Name</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="rota.php?uid=<?php echo $Getuser_id ?>">Rota</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="addtorota.php?uid=<?php echo $Getuser_id ?>">Add To Rota</a>
+                            <a class="nav-link" href="manager_rota.php">Rota</a>
                         </li>
                     </ul>
-                    <form class="d-flex" method="post">
-                        <input class="form-control me-2" type="text" placeholder="Name" name="username">
-                        <button class="btn btn-primary" type="submit" name="login">Enter</button>
-                    </form>
                 </div>
             </div>
         </nav>
