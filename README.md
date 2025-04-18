@@ -1,5 +1,7 @@
 Brighton Domains Link
-https://cn483.brighton.domains/ci536_group_project/pages/index.php?uid=
 
-https://cn483.brighton.domains/CI526-Group-Project/pages/employee_index.php
-https://cn483.brighton.domains/CI526-Group-Project/pages/manager_index.php
+EMPLOYEE PORTAL
+https://cn483.brighton.domains/CI536-Group-Rota-Project/pages/employee_index.php
+
+MANAGER PORTAL
+https://cn483.brighton.domains/CI536-Group-Rota-Project/pages/manager_index.php
