@@ -30,6 +30,10 @@ include "../conn/conn.php";
                 <li class="nav-item">
                     <a class="nav-link" href="employee_timeoff.php">Time Off</a>
                 </li>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="employee_dayavailability.php">Day Availability</a>
+                </li>
             </ul>
         </div>
     </div>
