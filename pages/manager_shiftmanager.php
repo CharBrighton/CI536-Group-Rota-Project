@@ -59,8 +59,8 @@ include "../logic/manager_shiftmanager_logic.php";
         return_current_shifts($date);
         echo "</ul>";
 
-        echo "<h2>Add Person To Date</h2>";
-        add_person_to_date();
+        echo "<h2>Add Person To Date $date</h2>";
+        add_person_to_date($date);
     }
     ?>
 </div>
