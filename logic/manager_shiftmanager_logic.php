@@ -25,13 +25,14 @@ function return_current_shifts($date): void
 
 function add_person_to_date($date): void
 {
-    ?>
+    global $date;
+    echo "
     <form method='POST'>
     <label for='person'>Select Person:</label>
     <select name='employee_id' id='person'>
-        <?php
+        ";
     people_available($date);
-    ?>
+    echo "
     </select>
     <label for='starttime'>Start Time:</label>
     <input type='time' name='starttime' value='starttime'>
@@ -44,15 +45,18 @@ function add_person_to_date($date): void
     <option value='0'>Regular</option>
     <option value='1'>Shift Manager</option>
     </Select>
+    <label for='date'>Shift Date:</label>
+    <input type='text' value='$date' name='date' readonly>
     <input type='submit' name='submit2' value='submit'>
     </form>
 
-    <?php
+    ";
 }
 
 if (isset($_POST['submit2'])) {
     global $conn;
 
+    $date = $_POST['date'];
     $uid = $_POST['employee_id'];
     $starttime = $_POST['starttime'] . ":00";
     $endtime = $_POST['endtime'] . ":00";
@@ -60,7 +64,7 @@ if (isset($_POST['submit2'])) {
     $role = $_POST['role'];
 
     $sql = "INSERT INTO shifts (employee_id, start_time, end_time, break_time, shift_date, position)
-    VALUES ('$uid','$starttime','$endtime','$breaktime','2025-04-21','$role')";
+    VALUES ('$uid','$starttime','$endtime','$breaktime','$date','$role')";
 
     if (mysqli_query($conn, $sql)) {
         echo '<script>alert("SUCCESS")</script>';
