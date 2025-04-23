@@ -42,5 +42,10 @@ include "../conn/conn.php";
     </div>
 </nav>
 
+<div>
+    <h1>Welcome, ADDNAME!</h1>
+    <p>This manager portal is an easy way for you to view rotas, add people to rotas and approve leave.</p>
+</div>
+
 </body>
 </html>
