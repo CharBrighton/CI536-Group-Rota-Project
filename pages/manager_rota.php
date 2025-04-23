@@ -41,6 +41,9 @@ include '../logic/getshiftsforday.php';
                         <li class="nav-item">
                             <a class="nav-link" href="manager_timeoff.php">Manage Time Off</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="manager_createemployee.php">Manage Time Off</a>
+                        </li>
                     </ul>
                 </div>
             </div>
