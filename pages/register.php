@@ -1,10 +1,6 @@
 <?php
 session_start();
-// If the user is logged in, redirect to the home page
-if (isset($_SESSION['account_loggedin'])) {
-	header('Location: home.php');
-	exit;
-}
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -25,16 +21,36 @@ if (isset($_SESSION['account_loggedin'])) {
 					<input class="form-input" type="text" name="username" placeholder="Username" id="username" required>
 				</div>
 
+                <label class="form-label" for="firstname">First Name</label>
+                <div class="form-group">
+                    <input class="form-input" type="text" name="firstname" placeholder="john" id="firstname" required>
+                </div>
+                <label class="form-label" for="lastname">Last Name</label>
+                <div class="form-group">
+                    <input class="form-input" type="text" name="lastname" placeholder="smith" id="lastname" required>
+                </div>
+                <label class="form-label" for="firstname">Date of Birth</label>
+                <div class="form-group">
+                    <input class="form-input" type="date" name="date"  id="date" required>
+                </div>
 				<label class="form-label" for="email">Email</label>
 				<div class="form-group">
 					<input class="form-input" type="email" name="email" placeholder="Email" id="email" required>
 				</div>
 
 				<label class="form-label" for="password">Password</label>
-				<div class="form-group mar-bot-5">
+				<div class="form-group">
 					<input class="form-input" type="password" name="password" placeholder="Password" id="password" autocomplete="new-password" required>
 				</div>
+                <label class="form-label" for="emplyeeType">Check if manager</label>
+                <div class="form-group">
+                    <input class="form-input" type="checkbox" name="employeeType" id="employeetype" value="1">
+                </div>
 
+                <label class="form-label" for="payrate">Date of Birth</label>
+                <div class="form-group">
+                    <input class="form-input" type="text" name="payrate"  id="payrate" required>
+                </div>
 				<button class="btn" type="submit">Register</button>
 
 				<p class="register-link">Already have an account? <a href="index.php" class="form-link">Login</a></p>

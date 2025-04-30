@@ -1,6 +1,7 @@
 <?php
-global $conn;
-include "conn/conP.php";
+
+
+
 if (mysqli_connect_errno()) {
     exit('Failed to connect to MySQL: ' . mysqli_connect_error());
 }
@@ -26,40 +27,99 @@ if (strlen($_POST['password']) > 20 || strlen($_POST['password']) < 5) {
 if (preg_match('/^[a-zA-Z0-9]+$/', $_POST['username']) == 0) {
 	exit('Username is not valid!');
 }
-// Check username is new
-if ($stmt = $con->prepare('SELECT id, password FROM accounts WHERE username = ?')) {
-    $stmt->bind_param('s', $_POST['username']);
-    $stmt->execute();
-    //store resylt
-    $stmt->store_result();
-    // Check if the account exists
-    if ($stmt->num_rows > 0) {
-        // Username already exists
-        echo 'Username already exists! Please choose another!';
-    } else {
+$checked = isset($_POST['employeeType']) ? 1 : 0;
 
-        $registered = date('d-m-Y H:i:s');
-        //hashing
-        $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
-        // Username added
-        if ($stmt = $con->prepare('INSERT INTO accounts (username, password, email, registered) VALUES (?, ?, ?, ?)')) {
-            // Bind POST data 
-            $stmt->bind_param('ssss', $_POST['username'], $password, $_POST['email'], $registered);
-            $stmt->execute();
-            
-            echo 'You have successfully registered! You can now login!';
+pswrd($checked);
+employeeAdd($checked);
+//employeeGetId($checked);
+
+
+// Check username is new'
+function pswrd($checked): void
+{
+    global $con;
+    include "../conn/conP.php";
+
+    if ($stmt = $con->prepare('SELECT id, password FROM accounts WHERE username = ?')) {
+        $stmt->bind_param('s', $_POST['username']);
+        $stmt->execute();
+        //store result
+        $stmt->store_result();
+        // Check if the account exists
+        if ($stmt->num_rows > 0) {
+            // Username already exists
+            echo 'Username already exists! Please choose another!';
         } else {
-            // Sql error
-            echo 'Could not prepare statement!';
-        }
 
+            $registered = date('Y-m-d H:i:s');
+            //hashing
+            $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+            // Username added
+            if ($stmt = $con->prepare('INSERT INTO accounts (username, password, email, registered, employeeType) VALUES (?, ?, ?, ?, ?)')) {
+                // Bind POST data
+                $stmt->bind_param('ssssi', $_POST['username'], $password, $_POST['email'], $registered, $checked);
+                $stmt->execute();
+
+
+
+            } else {
+                // Sql error
+                echo 'Could not prepare statement!';
+            }
+
+        }
+        // Close
+        $stmt->close();
     }
-    // Close 
-    $stmt->close();
-} else {
-    //error with sql
-    echo 'Could not prepare statement!';
+    $con->close();
+}
+
+function employeeAdd($checked): void
+{
+    global $conn;
+    include "../conn/conn.php";
+
+    $fn = $_POST['firstname'];
+    $ln = $_POST['lastname'];
+    $dob = $_POST['date'];
+    $payrate = $_POST['payrate'];
+
+    $stmt = "INSERT INTO employee (first_name, last_name, dob, pay_rate, manager) VALUES ('$fn', '$ln', '$dob', '$payrate', '$checked')";
+    if(mysqli_query($conn, $stmt)){
+        employeeGetId($conn, $checked);
+    }
+    else{
+        echo "Error: " . $stmt . "<br>" . mysqli_error($conn);
+    }
+
+}
+
+function employeeGetId($conn, $checked): void
+{
+
+    $fn = $_POST['firstname'];
+    $ln = $_POST['lastname'];
+
+    $stmt = "SELECT employee_id FROM employee WHERE first_name = '$fn' AND last_name = '$ln'";
+    $result = mysqli_query($conn, $stmt);
+    $row = mysqli_fetch_row($result);
+    $coobasId = $row[0];
+
+    echo "<script>alert('$coobasId');</script>";
+
+
+    insertDays($conn,$coobasId);
+
+}
+function insertDays($conn,$coobasId): void
+{
+    $stmt = "INSERT INTO day_availability (employee_id, monday, tuesday, wednesday, thursday, friday, saturday, sunday) VALUES ('$coobasId', '0', '0', '0', '0','0','0','0')";
+    if(mysqli_query($conn, $stmt)){
+        header('Location: account_registered.php');
+    }
+    else{
+        echo "Error: " . $stmt . "<br>" . mysqli_error($conn);
+    }
 }
 // Close 
-$con->close();
 ?>

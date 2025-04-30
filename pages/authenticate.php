@@ -1,6 +1,6 @@
 <?php
 session_start();
-global $conn;
+global $con;
 include "../conn/conP.php";
 // Check for connection errors
 if (mysqli_connect_errno()) {
@@ -14,7 +14,7 @@ if (!isset($_POST['username'], $_POST['password'])) {
     exit('Please fill both the username and password fields!');
 }
 // Prepare our SQL to prevent SQL injection
-if ($stmt = $con->prepare('SELECT id, password FROM accounts WHERE username = ?')) {
+if ($stmt = $con->prepare('SELECT id, password, employeeType FROM accounts WHERE username = ?')) {
     $stmt->bind_param('s', $_POST['username']);
     $stmt->execute();
     $stmt->store_result();
@@ -22,7 +22,7 @@ if ($stmt = $con->prepare('SELECT id, password FROM accounts WHERE username = ?'
     // Check if account exists
     if ($stmt->num_rows > 0) {
         // Account exists
-        $stmt->bind_result($id, $password);
+        $stmt->bind_result($id, $password, $employeeType);
         $stmt->fetch();
         //hashing
         if (password_verify($_POST['password'], $password)) {
@@ -30,7 +30,15 @@ if ($stmt = $con->prepare('SELECT id, password FROM accounts WHERE username = ?'
             $_SESSION['account_loggedin'] = TRUE;
             $_SESSION['account_name'] = $_POST['username'];
             $_SESSION['account_id'] = $id;
-            header('Location: manager_index.php');
+            if($employeeType == 1) {
+                header('Location: manager_index.php');
+            }elseif ($employeeType == 0) {
+                header('Location: employee_index.php');
+
+            }else{
+                echo "employee type unknown please contact your system administrator";
+            }
+
             exit;
         } else {
             // Incorrect password
