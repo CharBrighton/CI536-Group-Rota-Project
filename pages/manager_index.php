@@ -35,7 +35,7 @@ include "../conn/conn.php";
                     <a class="nav-link" href="manager_timeoff.php">Manage Time Off</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="manager_createemployee.php">Manage Time Off</a>
+                    <a class="nav-link" href="manager_createemployee.php">Add Employee</a>
                 </li>
             </ul>
         </div>
@@ -43,8 +43,22 @@ include "../conn/conn.php";
 </nav>
 
 <div>
-    <h1>Welcome, ADDNAME!</h1>
-    <p>This manager portal is an easy way for you to view rotas, add people to rotas and approve leave.</p>
+    <h1>Welcome, MANAGER NAME!</h1>
+    <div>
+        <p>This manager portal is an easy way for you to view rotas, add people to rotas and approve leave.</p>    </div>
+    <div>
+        <h2>Features</h2>
+        <dl>
+            <dt>Full Rota</dt>
+            <dd>View your current and previous shifts.</dd>
+            <dt>Manage Rota</dt>
+            <dd>Add employees to shifts.</dd>
+            <dt>Manage Time Off</dt>
+            <dd>Accept and Decline employees time off requests.</dd>
+            <dt>Add Employee</dt>
+            <dd>Allows you to add an employee and create them an account to login with.</dd>
+        </dl>
+    </div>
 </div>
 
 </body>

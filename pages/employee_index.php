@@ -39,5 +39,23 @@ include "../conn/conn.php";
     </div>
 </nav>
 
+<div>
+    <h1>Welcome, EMPLOYEE NAME!</h1>
+    <div>
+        <p>In this employee portal you can access everything you need to view your shifts, request time off and keep on top of all your work needs.</p>
+    </div>
+    <div>
+        <h2>Features</h2>
+        <dl>
+            <dt>My Rota</dt>
+            <dd>View your current and previous shifts</dd>
+            <dt>Time Off</dt>
+            <dd>Request time off and view the progress of your requests.</dd>
+            <dt>Day Availability</dt>
+            <dd>Select which days of the week you would like to work.</dd>
+        </dl>
+    </div>
+</div>
+
 </body>
 </html>
