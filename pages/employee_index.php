@@ -35,7 +35,7 @@ include "../conn/conn.php";
                     <a class="nav-link" href="employee_dayavailability.php">Day Availability</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="logout.php">Log Out</a>
+                    <a class="nav-link" href="../logic/logout_logic.php">Log Out</a>
                 </li>
             </ul>
         </div>

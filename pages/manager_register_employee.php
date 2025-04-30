@@ -12,9 +12,9 @@ session_start();
 	<body>
 		<div class="login">
 
-			<h1>Member Register</h1>
+			<h1>Employee Register</h1>
 
-			<form action="register-process.php" method="post" class="form login-form">
+			<form action="../logic/register_logic.php" method="post" class="form login-form">
 
 				<label class="form-label" for="username">Username</label>
 				<div class="form-group">
@@ -47,7 +47,7 @@ session_start();
                     <input class="form-input" type="checkbox" name="employeeType" id="employeetype" value="1">
                 </div>
 
-                <label class="form-label" for="payrate">Date of Birth</label>
+                <label class="form-label" for="payrate">Pay Rate (in pence)</label>
                 <div class="form-group">
                     <input class="form-input" type="text" name="payrate"  id="payrate" required>
                 </div>

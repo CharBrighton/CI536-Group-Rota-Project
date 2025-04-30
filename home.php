@@ -24,7 +24,7 @@ if (!isset($_SESSION['account_loggedin'])) {
                 
                 <nav class="menu">
                     <a href="home.php">Home</a>
-                    <a href="pages/logout.php">
+                    <a href="logic/logout_logic.php">
                         Logout
                     </a>
                 </nav>

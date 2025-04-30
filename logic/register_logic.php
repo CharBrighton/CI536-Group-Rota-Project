@@ -30,9 +30,6 @@ if (preg_match('/^[a-zA-Z0-9]+$/', $_POST['username']) == 0) {
 $checked = isset($_POST['employeeType']) ? 1 : 0;
 
 pswrd($checked);
-employeeAdd($checked);
-//employeeGetId($checked);
-
 
 // Check username is new'
 function pswrd($checked): void
@@ -60,7 +57,21 @@ function pswrd($checked): void
                 $stmt->bind_param('ssssi', $_POST['username'], $password, $_POST['email'], $registered, $checked);
                 $stmt->execute();
 
+                $username_variable = $_POST['username'];
+                if ($stmt = $con->prepare("SELECT id FROM accounts WHERE username = ?")) {
+                    // Bind the username to the placeholder (?)
+                    $stmt->bind_param("s", $username_variable); // "s" means string type
+                    $stmt->execute();
+                    $stmt->store_result();
 
+                    if ($stmt->num_rows > 0) {
+                        // Bind the result (i.e., the ID column)
+                        $stmt->bind_result($jamesid);
+                        $stmt->fetch(); // Fetch the result into $jamesid
+
+                        employeeAdd($checked, $jamesid);
+                    }
+                }
 
             } else {
                 // Sql error
@@ -74,7 +85,7 @@ function pswrd($checked): void
     $con->close();
 }
 
-function employeeAdd($checked): void
+function employeeAdd($checked, $jamesid): void
 {
     global $conn;
     include "../conn/conn.php";
@@ -84,7 +95,7 @@ function employeeAdd($checked): void
     $dob = $_POST['date'];
     $payrate = $_POST['payrate'];
 
-    $stmt = "INSERT INTO employee (first_name, last_name, dob, pay_rate, manager) VALUES ('$fn', '$ln', '$dob', '$payrate', '$checked')";
+    $stmt = "INSERT INTO employee (employee_id, first_name, last_name, dob, pay_rate, manager) VALUES ('$jamesid','$fn', '$ln', '$dob', '$payrate', '$checked')";
     if(mysqli_query($conn, $stmt)){
         employeeGetId($conn, $checked);
     }
