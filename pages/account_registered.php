@@ -1,6 +1,9 @@
 <?php
 session_start();
-
+if (!isset($_SESSION['account_loggedin'])) {
+    header("location:index.php");
+    exit;
+}
 ?>
 <html>
 

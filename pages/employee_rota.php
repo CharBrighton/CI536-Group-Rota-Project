@@ -4,6 +4,15 @@
 global $conn;
 include "../conn/conn.php";
 include "../logic/employee_rota_logic.php";
+
+session_start();
+if (!isset($_SESSION['account_loggedin'])) {
+    header("location:index.php");
+    exit;
+}
+if(isset($_SESSION['manager'])){
+    header("location:manager_index.php");
+}
 ?>
 
 <!DOCTYPE html>

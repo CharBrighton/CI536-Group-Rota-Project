@@ -3,7 +3,13 @@
 //error_reporting(0);
 global $conn;
 include "../conn/conn.php";
-
+if (!isset($_SESSION['account_loggedin'])) {
+    header("location:index.php");
+    exit;
+}
+if(!isset($_SESSION['manager'])){
+    header("location:employee_index.php");
+}
 ?>
 
 <!DOCTYPE html>

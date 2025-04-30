@@ -1,6 +1,14 @@
 <?php
 //hides errors showing on the page but keep commented out for dev purposes
 //error_reporting(0);
+session_start();
+if (!isset($_SESSION['account_loggedin'])) {
+    header("location:index.php");
+    exit;
+}
+if(isset($_SESSION['manager'])){
+    header("location:manager_index.php");
+}
 global $conn;
 include "../conn/conn.php";
 ?>

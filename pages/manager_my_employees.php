@@ -1,6 +1,12 @@
 <?php
 session_start();
-
+if (!isset($_SESSION['account_loggedin'])) {
+    header("location:index.php");
+    exit;
+}
+if(!isset($_SESSION['manager'])){
+    header("location:employee_index.php");
+}
 ?>
 <!DOCTYPE html>
 <html>

@@ -26,14 +26,22 @@ if ($stmt = $con->prepare('SELECT id, password, employeeType FROM accounts WHERE
         $stmt->fetch();
         //hashing
         if (password_verify($_POST['password'], $password)) {
-            session_regenerate_id();
-            $_SESSION['account_loggedin'] = TRUE;
-            $_SESSION['account_name'] = $_POST['username'];
-            $_SESSION['account_id'] = $id;
+
             if($employeeType == 1) {
-                header('Location: manager_index.php');
+                session_regenerate_id();
+                $_SESSION['account_loggedin'] = TRUE;
+                $_SESSION['account_name'] = $_POST['username'];
+                $_SESSION['account_id'] = $id;
+                $_SESSION['employeeType'] = "manager_index.php";
+                $_SESSION['manager'] = true;
+                header('Location: ../pages/manager_index.php');
             }elseif ($employeeType == 0) {
-                header('Location: employee_index.php');
+                session_regenerate_id();
+                $_SESSION['account_loggedin'] = TRUE;
+                $_SESSION['account_name'] = $_POST['username'];
+                $_SESSION['account_id'] = $id;
+                $_SESSION['employeeType'] = "employee_index.php";
+                header('Location: ../pages/employee_index.php');
 
             }else{
                 echo "employee type unknown please contact your system administrator";

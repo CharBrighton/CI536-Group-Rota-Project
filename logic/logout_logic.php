@@ -4,6 +4,6 @@ session_start();
 // Destroy the active session
 session_destroy();
 // Redirect to the login pag-
-header('Location: index.php');
+header('Location: ../pages/index.php');
 exit;
 ?>

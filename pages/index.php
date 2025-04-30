@@ -2,7 +2,7 @@
 session_start();
 // If the user is logged in redirects to the home page
 if (isset($_SESSION['account_loggedin'])) {
-    header('Location: manager_index.php');
+    header("location :$_SESSION[employeeType]");
     exit;
 }
 ?>
