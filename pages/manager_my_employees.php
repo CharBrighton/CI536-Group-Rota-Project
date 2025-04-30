@@ -1,21 +1,16 @@
 <?php
-//hides errors showing on the page but keep commented out for dev purposes
-//error_reporting(0);
-global $conn;
-include "../conn/conn.php";
-?>
+session_start();
 
+?>
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <title>Manager Home</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="../js/manager_index.js"></script>
+    <title>Register</title>
 </head>
-
 <body>
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
     <div class="container-fluid">
@@ -25,6 +20,7 @@ include "../conn/conn.php";
         </button>
         <div class="collapse navbar-collapse" id="collapsibleNavbar">
             <ul class="navbar-nav me-auto">
+
                 <li class="nav-item">
                     <a class="nav-link" href="manager_rota.php">Full Rota</a>
                 </li>
@@ -48,5 +44,33 @@ include "../conn/conn.php";
     </div>
 </nav>
 
+<div class="container">
+    <h2>My Employees</h2>
+    <?php
+    global $conn;
+    include "../conn/conn.php";
+
+    $sql = "SELECT first_name, last_name, dob, pay_rate, manager FROM employee";
+    $result = mysqli_query($conn, $sql);
+    $row = mysqli_fetch_row($result);
+
+    while ($row = mysqli_fetch_assoc($result)) {
+        $manager = "";
+        if ($row["manager"] == 1) {
+            $manager = "Yes";
+        }
+        else{
+            $manager = "No";
+        }
+
+        echo"<ul>";
+        echo "<li>Name: " . $row["first_name"] . " " . $row["last_name"] . "</li>";
+        echo "<li>Dob: " . $row["dob"] . "</li>";
+        echo "<li>Pay Rate: " . $row["pay_rate"] . "</li>";
+        echo "<li>Manager: " . $manager . "</li>";
+        echo "</ul>";
+    }
+    ?>
+</div>
 </body>
 </html>

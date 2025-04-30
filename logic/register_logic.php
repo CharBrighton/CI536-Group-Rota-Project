@@ -110,14 +110,13 @@ function employeeGetId($conn, $checked): void
 
     $fn = $_POST['firstname'];
     $ln = $_POST['lastname'];
+    $dob = $_POST['date'];
+    $payrate = $_POST['payrate'];
 
-    $stmt = "SELECT employee_id FROM employee WHERE first_name = '$fn' AND last_name = '$ln'";
+    $stmt = "SELECT employee_id FROM employee WHERE first_name = '$fn' AND last_name = '$ln' AND pay_rate = '$payrate' AND dob = '$dob'";
     $result = mysqli_query($conn, $stmt);
     $row = mysqli_fetch_row($result);
     $coobasId = $row[0];
-
-    echo "<script>alert('$coobasId');</script>";
-
 
     insertDays($conn,$coobasId);
 
@@ -126,7 +125,7 @@ function insertDays($conn,$coobasId): void
 {
     $stmt = "INSERT INTO day_availability (employee_id, monday, tuesday, wednesday, thursday, friday, saturday, sunday) VALUES ('$coobasId', '0', '0', '0', '0','0','0','0')";
     if(mysqli_query($conn, $stmt)){
-        header('Location: account_registered.php');
+        header('Location: ../pages/manager_index.php');
     }
     else{
         echo "Error: " . $stmt . "<br>" . mysqli_error($conn);
