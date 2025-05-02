@@ -7,38 +7,43 @@ session_start();
 //}
 ?>
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width,minimum-scale=1">
-        <title>Login</title>
-    </head>
-    <body>
-        <div class="login">
+<html lang="en">
+<head>
+    <title>Rota System Login</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <link href="../css/general_css.css" rel="stylesheet">
+</head>
+<body>
+<div class="wrapper">
+    <div class="container-fluid">
 
-            <h1>Rota System Login</h1>
+        <h1>Rota System Login</h1>
 
-            <form action="../logic/authenticate.php" method="post" class="form login-form">
+        <form action="../logic/authenticate.php" method="post" class="form login-form">
 
-                <label class="form-label" for="username">Username</label>
-                <div class="form-group">
-                    <input class="form-input" type="text" name="username" placeholder="Username" id="username" required>
-                </div>
+            <label class="form-label" for="username">Username</label>
+            <div class="form-group">
+                <input class="form-input" type="text" name="username" placeholder="Username" id="username" required>
+            </div>
 
-                <label class="form-label" for="password">Password</label>
-                <div class="form-group mar-bot-5">
-                    <input class="form-input" type="password" name="password" placeholder="Password" id="password" required>
-                </div>
+            <label class="form-label" for="password">Password</label>
+            <div class="form-group mar-bot-5">
+                <input class="form-input" type="password" name="password" placeholder="Password" id="password" required>
+            </div>
 
-                <button class="btn blue" type="submit">Login</button>
+            <button class="btn blue" type="submit">Login</button>
 
+        </form>
 
-            </form>
+    </div>
 
-        </div>
-
-    <div><p>Manager TEST USER: Username: MANAGERTEST Password: managertest</p>
-        <p>Employee TEST USER: Username: EMPLOYEETEST Password: employeetest</p></div>
-
-    </body>
+    <div class="container-fluid">
+        <p>Manager TEST USER: Username: MANAGERTEST Password: managertest</p>
+        <p>Employee TEST USER: Username: EMPLOYEETEST Password: employeetest</p>
+    </div>
+</div>
+</body>
 </html>
