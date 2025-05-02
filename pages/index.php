@@ -1,10 +1,10 @@
 <?php
 session_start();
 // If the user is logged in redirects to the home page
-if (isset($_SESSION['account_loggedin'])) {
-    header("location :$_SESSION[employeeType]");
-    exit;
-}
+//if (isset($_SESSION['account_loggedin'])) {
+//    header("location :$_SESSION[employeeType]");
+//    exit;
+//}
 ?>
 <!DOCTYPE html>
 <html>
@@ -16,7 +16,7 @@ if (isset($_SESSION['account_loggedin'])) {
     <body>
         <div class="login">
 
-            <h1>Employee Login</h1>
+            <h1>Rota System Login</h1>
 
             <form action="../logic/authenticate.php" method="post" class="form login-form">
 
@@ -36,6 +36,9 @@ if (isset($_SESSION['account_loggedin'])) {
             </form>
 
         </div>
+
+    <div><p>Manager TEST USER: Username: MANAGERTEST Password: managertest</p>
+        <p>Employee TEST USER: Username: EMPLOYEETEST Password: employeetest</p></div>
 
     </body>
 </html>
