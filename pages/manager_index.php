@@ -60,7 +60,20 @@ include "../conn/conn.php";
 </nav>
 
     <div class="container-fluid">
-        <h2>Welcome, <?=htmlspecialchars($_SESSION['account_name'], ENT_QUOTES)?>!</h2>
+        <h1>Welcome, <?= htmlspecialchars($_SESSION['account_name'], ENT_QUOTES) ?> to the Scheduling Portal</h1>
+        <p>Manage work, your way.</p>
+        <p>This is your one-stop hub for all things scheduling. Here, you can:</p>
+        <ul>
+            <li>Use <strong>Full Rota</strong> to view all shifts and info about the shift.</li>
+            <li>Use <strong>Manage Rota</strong> to create shifts.</li>
+            <li>Use <strong>Manage Time Off</strong> to accept, and decline requested time off by all employees.</li>
+            <li>Use <strong>New Employee</strong> to set up an account for a new employee.</li>
+            <li>Use <strong>My Employees</strong> to view all current employees, and delete old ones.</li>
+            <li>Use <strong>My Rota</strong> to stay up to date with upcoming shifts and view your previous shifts.</li>
+            <li>Use<strong>Day Availability</strong> to show your preference so you can be scheduled when it works best.</li>
+            <li>Use<strong>Time Off</strong> to quickly and easily request time off with real time status updates.</li>
+        </ul>
+        <p>Whether you're planning ahead or making a last-minute change, the tools you need are right here.</p>
     </div>
 
 </div>

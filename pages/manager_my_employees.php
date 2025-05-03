@@ -51,7 +51,7 @@ if (!isset($_SESSION['manager'])) {
         </div>
     </nav>
 
-    <div class="container">
+    <div class="container-fluid">
         <h2>My Employees</h2>
         <?php
         global $conn;
@@ -75,6 +75,51 @@ if (!isset($_SESSION['manager'])) {
             echo "<li>Pay Rate: " . $row["pay_rate"] . "</li>";
             echo "<li>Manager: " . $manager . "</li>";
             echo "</ul>";
+        }
+        ?>
+    </div>
+
+    <div class="container-fluid">
+
+        <h2>Delete Employee</h2>
+
+        <form method="POST">
+
+            <?php
+            include "../logic/manager_my_employees_logic.php";
+
+            ?>
+            <select name='employee_id' id='person'>
+                <?php
+                all_select();
+                ?>
+            </select>
+
+            <input type="submit" name="submit" value="submit">
+
+        </form>
+
+        <?php
+        global $conn;
+        include "../conn/conn.php";
+
+        if (isset($_POST['submit'])) {
+            $uid = $_POST['employee_id'];
+
+            $sql = "DELETE FROM day_availability WHERE employee_id = '$uid'";
+            if (mysqli_query($conn, $sql)) {
+                $sql2 = "DELETE FROM employee WHERE employee_id = '$uid'";
+                if (mysqli_query($conn, $sql2)) {
+                    echo '<script>alert("Record deleted successfully")</script>';
+                } else {
+                    echo "Error deleting record: " . mysqli_error($conn);
+                }
+            } else {
+                echo "Error deleting record: " . mysqli_error($conn);
+            }
+
+            mysqli_close($conn);
+
         }
         ?>
     </div>

@@ -60,7 +60,11 @@ include "../conn/conn.php";
         </nav>
     </div>
 
-    <div class="container-fluid"></div>
+    <div class="container-fluid">
+
+        <!--- CODE HERE --->
+
+    </div>
 
 </div>
 </body>
