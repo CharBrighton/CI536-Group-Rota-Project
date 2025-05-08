@@ -17,37 +17,37 @@
 }
 .monday{
     grid-area: monday;
-    border-color: red;
+    border-color: grey;
     border-style: solid;
 }
 .tuesday{
     grid-area: tuesday;
-    border-color: green;
+    border-color: grey;
     border-style: solid;
 }
 .wednesday{
     grid-area: wednesday;
-    border-color: blue;
+    border-color: grey;
     border-style: solid;
 }
 .thursday{
     grid-area: thursday;
-    border-color: yellow;
+    border-color: grey;
     border-style: solid;
 }
 .friday{
     grid-area: friday;
-    border-color: orange;
+    border-color: grey;
     border-style: solid;
 }
 .saturday{
     grid-area: saturday;
-    border-color: saddlebrown;
+    border-color: grey;
     border-style: solid;
 }
 .sunday{
     grid-area: sunday;
-    border-color: purple;
+    border-color: grey;
     border-style: solid;
 }
 

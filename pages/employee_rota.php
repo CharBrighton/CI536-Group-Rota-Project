@@ -56,17 +56,19 @@ if (isset($_SESSION['manager'])) {
     </nav>
 
     <div class="container-fluid">
-        <h2>My Shifts</h2>
-        <h3>
-            Welcome, <?= htmlspecialchars($_SESSION['account_name'], ENT_QUOTES) ?>!
-        </h3>
+        <h1>My Shifts</h1>
+        <p>Welcome to the My Shifts page where below you can view your upcoming shifts and previous shifts.</p>
+    </div>
+
+    <div class="container-fluid">
+        <h3><?= htmlspecialchars($_SESSION['account_name'], ENT_QUOTES) ?>'s Upcoming Shifts</h3>
         <div>
             <ul>
                 <?php employee_my_future_shifts($_SESSION['account_id']); ?>
             </ul>
         </div>
         <div>
-            <h3>Previous Shifts</h3>
+            <h3><?= htmlspecialchars($_SESSION['account_name'], ENT_QUOTES) ?>'s Previous Shifts</h3>
             <ul>
                 <?php employee_my_previous_shifts($_SESSION['account_id']); ?>
             </ul>
