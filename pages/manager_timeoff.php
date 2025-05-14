@@ -12,23 +12,23 @@ if (!isset($_SESSION['manager'])) {
     header("location:employee_index.php");
 }
 
-class Manager
+class Manager  // PHP class for handling page
 {
 
     private int $id;
 
-    public function __construct()
+    public function __construct() // Class constructor: sets user ID
     {
         $this->setId($_SESSION['account_id']);
     }
 
-    public function setId($id): void
+    private function setId($id): void  // ID setter, prevents dealing with globals
     {
         $this->id = $id;
     }
 
 
-    private function statusValues($status): array
+    private function statusValues($status): array  // returning values in array based on status result
     {
         switch ($status) {
             case 0:
@@ -42,11 +42,14 @@ class Manager
         }
     }
 
-    public function getPendingRequests(): string
+    public function getPendingRequests(): string  // Populating pending results t
     {
         global $conn;
 
-        $result = mysqli_query($conn, "SELECT * FROM `timeoff_requests` WHERE 'request_status' = 0");
+        $result = mysqli_query($conn, "SELECT * FROM `timeoff_requests` 
+                                             INNER JOIN employee 
+                                             ON employee.employee_id = timeoff_requests.employee_id
+                                             WHERE 'request_status' = 0");
         $output = "";
 
         while ($row = mysqli_fetch_assoc($result)) {
@@ -62,7 +65,8 @@ class Manager
 
                     $output .= '<div class="request-div pending-row '. $current_user_class .'" >';
                     $output .= '<input value="' . $checkbox_value . '" name="approve-checkbox" type="radio" form="pending-form">';
-            $output .= "<p> " . $row['employee_id'] . " </p>";
+                    $output .= "<p> " . $row['employee_id'] . " </p>";
+                    $output .= "<p> " . $row['first_name'] . " " . $row['last_name'] ." </p>";
                     $output .= "<p> " . $requested_date . " </p>";
                     $output .= "<p> " . $row['request_date'] . " </p>";
                     $output .= '</div>';
@@ -208,6 +212,7 @@ $manager = new Manager();
                     <div class="request-div">
                         <p></p>
                         <p> Employee ID </p>
+                        <p> Name </p>
                         <p> Requested Date </p>
                         <p> Date Of Request </p>
                     </div>
