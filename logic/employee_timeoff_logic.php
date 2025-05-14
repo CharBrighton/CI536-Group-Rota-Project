@@ -3,6 +3,7 @@ include "../logic/today_date.php";
 include "../conn/conn.php";
 
 global $conn;
+$url = $_SERVER['HTTP_REFERER'];
 
 if ($_POST['submit'] == "Request") {
     if (strlen($_POST['requestedDate']) == 10) {
@@ -47,18 +48,18 @@ if ($_POST['submit'] == "Request") {
                 }
             }
 
-            echo "<br><a href='../pages/employee_index.php'>Return</a>";
+            echo "<br><a href='" . $url . "'>Return</a>";
         } else {
 
             echo $requestDate;
-            echo "<a href='../pages/employee_index.php'>Return</a>";
+            echo "<a href='" . $url . "'>Return</a>";
 
 
         }
 
     } else {
         echo "Error: No date selected. <br>";
-        echo "<a href='../pages/employee_index.php'>Return</a>";
+        echo "<a href='" . $url . "'>Return</a>";
     }
 
 } elseif ($_POST['submit'] == "Cancel") {
@@ -78,8 +79,8 @@ if ($_POST['submit'] == "Request") {
     } else {
         echo "No Shift Selected to cancel. <br>";
     }
-    echo "<a href='../pages/employee_index.php'>Return</a>";
+    echo "<a href='" . $url . "'>Return</a>";
 } else {
     echo "Invalid Request <br>";
-    echo "<a href='../pages/employee_index.php'>Return</a>";
+    echo "<a href='" . $url . "'>Return</a>";
 }
