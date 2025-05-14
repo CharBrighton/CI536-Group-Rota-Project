@@ -105,7 +105,6 @@ if (!isset($_SESSION['manager'])) {
 
         if (isset($_POST['submit'])) {
             $uid = $_POST['employee_id'];
-            $_SESSION['employee_id'] = $uid;
             $sql = "DELETE FROM day_availability WHERE employee_id = '$uid'";
             if (mysqli_query($conn, $sql)) {
                 $sql2 = "DELETE FROM employee WHERE employee_id = '$uid'";
