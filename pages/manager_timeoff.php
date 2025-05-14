@@ -42,26 +42,27 @@ class Manager  // PHP class for handling page
         }
     }
 
-    public function getPendingRequests(): string  // Populating pending results t
+    public function getPendingRequests(): string  // Populating pending results table
     {
         global $conn;
-
+        // SQL gets all pending requests, joins to employee table to display user's name
         $result = mysqli_query($conn, "SELECT * FROM `timeoff_requests` 
                                              INNER JOIN employee 
                                              ON employee.employee_id = timeoff_requests.employee_id
                                              WHERE 'request_status' = 0");
         $output = "";
 
-        while ($row = mysqli_fetch_assoc($result)) {
+        while ($row = mysqli_fetch_assoc($result)) {  // Iterating over results, can be null if none pending
+            // If request hasn't passed (including today) and status is pending, output row
             if (strtotime($row['shift_date']) > time() && $row['request_status'] == 0) {
 
-                    $current_user_class = "";
+                    $current_user_class = "";  // adding class to current user's request for easier identification
                     if ($row['employee_id'] == $_SESSION['account_id']) {
                         $current_user_class = "current-user";
                     }
 
                     $requested_date = $row['shift_date'];
-                    $checkbox_value = $requested_date . "," . $row['employee_id'];
+                    $checkbox_value = $requested_date . "," . $row['employee_id'];  // combining values into csv for passing to form
 
                     $output .= '<div class="request-div pending-row '. $current_user_class .'" >';
                     $output .= '<input value="' . $checkbox_value . '" name="approve-checkbox" type="radio" form="pending-form">';
@@ -76,23 +77,26 @@ class Manager  // PHP class for handling page
         return $output;
     }
 
-    public function populateRequests($current): string
+    public function populateRequests($current): string  // Populating current and previous requests based on variable
     {
         global $conn;
 
+        // Gets all requests
         $result = mysqli_query($conn, "SELECT * FROM `timeoff_requests`");
         $output = "";
 
-        while ($row = mysqli_fetch_assoc($result)) {
+        while ($row = mysqli_fetch_assoc($result)) {  // Iterating through requests
             $status = $row['request_status'];
             $requested_date = $row['shift_date'];
-            $statusValues = $this->statusValues($status);
+            $statusValues = $this->statusValues($status);  // Getting status class and text values from status code
 
-            if ($this->id == $row["employee_id"] && $status != -2) {
+            if ($this->id == $row["employee_id"] && $status != -2) {  // If current user & not cancelled
 
-                if (($current && (date("Y-m-d") < $requested_date)) ||
-                    (!$current) && (date("Y-m-d") >= $requested_date)) {
+                if (($current && (date("Y-m-d") < $requested_date)) ||  // Current: after today
+                    (!$current) && (date("Y-m-d") >= $requested_date)) {  // Previous: today and before
                     $output .= '<div class="request-div ' . $statusValues[0] . '">';
+
+                    // only adds checkboxes to current request rows
                     if ($current) {
                         $output .= '<input value="' . $requested_date . '" name="cancel-checkbox" type="radio" form="current-form">';
                     }
@@ -128,6 +132,8 @@ $manager = new Manager();
 
 <body>
 <div class="wrapper">
+
+    <!-- Navbar -->
     <div class="topnav">
         <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
             <div class="container-fluid">
@@ -163,8 +169,9 @@ $manager = new Manager();
     </div>
 
     <div class="container-fluid">
-
         <div id="content">
+
+            <!-- Current Requests -->
             <div class="container" id="current-requests">
                 <p>Current Requests</p>
                 <div class="scroll-area" id="current-scroll">
@@ -177,6 +184,7 @@ $manager = new Manager();
                     <?php echo $manager->populateRequests(true); ?>
                 </div>
 
+                <!-- Current Requests Buttons -->
                 <div class="submit_row">
                     <form action="../logic/timeoff_logic.php" method="post" id="current-form">
                         <label> Date requested:
@@ -190,6 +198,7 @@ $manager = new Manager();
 
             <div class="row-break"></div>
 
+            <!-- Previous Requests -->
             <div class="container" id="previous-requests">
                 <p>Previous Requests</p>
                 <div class="scroll-area" id="previous-scroll">
@@ -204,8 +213,7 @@ $manager = new Manager();
             </div>
             <div class="row-break"></div>
 
-
-
+            <!-- Pending Requests -->
             <div class="container" id="pending-requests">
                 <p> Pending Requests </p>
                 <div class="scroll-area" id="pending-scroll">
@@ -219,6 +227,7 @@ $manager = new Manager();
                     <?php echo $manager->getPendingRequests(); ?>
                 </div>
 
+                <!-- Pending Requests Buttons -->
                 <div class="submit_row">
                     <form action="../logic/timeoff_logic.php" method="post" id="pending-form">
                         <input type="submit" name="submit" value="Accept">

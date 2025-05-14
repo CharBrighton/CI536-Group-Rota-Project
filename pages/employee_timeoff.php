@@ -13,23 +13,23 @@ if (isset($_SESSION['manager'])) {
     header("location:manager_index.php");
 }
 
-class Employee
+class Employee // PHP class for handling page
 {
 
     private int $id;
 
-    public function __construct()
+    public function __construct() // Class constructor: sets user ID
     {
         $this->setId($_SESSION['account_id']);
     }
 
-    public function setId($id): void
+    public function setId($id): void  // ID setter, prevents dealing with globals
     {
         $this->id = $id;
     }
 
 
-    private function statusValues($status): array
+    private function statusValues($status): array  // returning values in array based on status result
     {
         switch ($status) {
             case 0:
@@ -44,23 +44,26 @@ class Employee
     }
 
 
-    public function populateRequests($current): string
+    public function populateRequests($current): string  // Populating current and previous requests based on variable
     {
         global $conn;
 
+        // Gets all requests
         $result = mysqli_query($conn, "SELECT * FROM `timeoff_requests`");
         $output = "";
 
-        while ($row = mysqli_fetch_assoc($result)) {
+        while ($row = mysqli_fetch_assoc($result)) {  // Iterating through requests
             $status = $row['request_status'];
             $requested_date = $row['shift_date'];
-            $statusValues = $this->statusValues($status);
+            $statusValues = $this->statusValues($status);  // Getting status class and text values from status code
 
-            if ($this->id == $row["employee_id"] && $status != -2) {
+            if ($this->id == $row["employee_id"] && $status != -2) {  // If current user & not cancelled
 
-                if (($current && (date("Y-m-d") < $requested_date)) ||
-                    (!$current) && (date("Y-m-d") >= $requested_date)) {
+                if (($current && (date("Y-m-d") < $requested_date)) ||  // Current: after today
+                    (!$current) && (date("Y-m-d") >= $requested_date)) {  // Previous: today and before
                     $output .= '<div class="request-div ' . $statusValues[0] . '">';
+
+                    // only adds checkboxes to current request rows
                     if ($current) {
                         $output .= '<input value="' . $requested_date . '" name="cancel-checkbox" type="radio" form="requestForm">';
                     }
@@ -95,6 +98,7 @@ $employee = new Employee();
 <body>
 <div class="wrapper">
 
+    <!-- Navbar -->
     <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
         <div class="container-fluid">
             <a class="navbar-brand" href="employee_index.php">Logo (Employee Portal)</a>
@@ -122,6 +126,7 @@ $employee = new Employee();
 
 
     <div id="content">
+        <!-- Current Requests -->
         <div class="container" id="current-requests">
             <p>Current Requests</p>
             <div class="scroll-area" id="current-scroll">
@@ -134,6 +139,7 @@ $employee = new Employee();
                 <?php echo $employee->populateRequests(true); ?>
             </div>
 
+            <!-- Current Requests Buttons -->
             <div class="submit_row">
                 <form action="../logic/timeoff_logic.php" method="post" id="requestForm">
                     <label> Date requested:
@@ -147,6 +153,7 @@ $employee = new Employee();
 
         <div class="row-break"></div>
 
+        <!-- Previous Requests -->
         <div class="container" id="previous-requests">
             <p>Previous Requests</p>
             <div class="scroll-area" id="previous-scroll">

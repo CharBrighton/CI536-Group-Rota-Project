@@ -47,7 +47,7 @@ function approve($bool, $conn, $url): string // Approving/Denying Requests, $boo
 
 // Submitting Request
 if ($_POST['submit'] == "Request") {
-    if (strlen($_POST['requestedDate']) == 10) {  // Validates date has been selected, as all dates have 10 chars (e.g. 01/01/1900 )
+    if (strlen($_POST['requestedDate']) == 10) {  // Validates date has been selected, as all dates have 10 chars (e.g. 01-01-1900 )
 
 
         $requestDate = $_POST['requestedDate'];
