@@ -12,6 +12,82 @@ if (!isset($_SESSION['account_loggedin'])) {
 if (isset($_SESSION['manager'])) {
     header("location:manager_index.php");
 }
+
+class Employee
+{
+
+    private $id;
+
+    public function __construct()
+    {
+        $this->setId(27); // TODO: Get Manager ID Dynamically
+    }
+
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
+
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    private function statusValues($status)
+    {
+        switch ($status) {
+            case 0:
+                return ["pending-row", "Pending"];
+            case 1:
+                return ["accepted-row", "Accepted"];
+            case -1:
+                return ["declined-row", "Declined"];
+            default:
+                return ["Unexpected Value: " . $status, "Unexpected Value: " . $status];
+        }
+    }
+
+
+    public function populateRequests($current)
+    {
+        global $conn;
+
+        $result = mysqli_query($conn, "SELECT * FROM `timeoff_requests`");
+        $output = "";
+
+        while ($row = mysqli_fetch_assoc($result)) {
+            $status = $row['request_status'];
+            $requested_date = $row['shift_date'];
+            $statusValues = $this->statusValues($status);
+
+            if ($this->id == $row["employee_id"] && $status != -2) {
+
+                if (($current && (date("Y-m-d") < $requested_date)) ||
+                    (!$current) && (date("Y-m-d") >= $requested_date)) {
+                    $output .= '<div class="request-div ' . $statusValues[0] . '">';
+                    if ($current) {
+                        $output .= '<input value="' . $requested_date . '" name="cancel-checkbox" type="radio" form="requestForm">';
+                    }
+                    $output .= "<p> " . $requested_date . " </p>";
+                    $output .= "<p> " . $row['request_date'] . " </p>";
+                    $output .= "<p> " . $statusValues[1] . " </p>";
+                    $output .= '</div>';
+                }
+            }
+        }
+
+        return $output;
+    }
+
+    public function addHiddenInputs()
+    {
+        $output = "<input type='hidden' name='currentDate' value='" . date("Y-m-d") . "'>";
+        $output .= "<input type='hidden' name='userID' value='" . $this->id . "'>";
+        echo $output;
+    }
+}
+
+$employee = new Employee();
 ?>
 
 <!DOCTYPE html>
@@ -24,6 +100,7 @@ if (isset($_SESSION['manager'])) {
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../js/employee_timeoff.js"></script>
     <link href="../css/general_css.css" rel="stylesheet">
+    <link href="../css/employee_timeoff.css" rel="stylesheet">
 </head>
 
 <body>
@@ -43,7 +120,6 @@ if (isset($_SESSION['manager'])) {
                     <li class="nav-item">
                         <a class="nav-link" href="employee_timeoff.php">Time Off</a>
                     </li>
-                    </li>
                     <li class="nav-item">
                         <a class="nav-link" href="employee_dayavailability.php">Day Availability</a>
                     </li>
@@ -54,10 +130,19 @@ if (isset($_SESSION['manager'])) {
             </div>
         </div>
     </nav>
+
+
     <div id="content">
         <div class="container" id="current-requests">
             <p>Current Requests</p>
             <div class="scroll-area" id="current-scroll">
+                <div class="request-div">
+                    <p></p>
+                    <p> Requested Date </p>
+                    <p> Date of Request </p>
+                    <p> Request Status </p>
+                </div>
+                <?php echo $employee->populateRequests(true); ?>
             </div>
 
             <div class="submit_row">
@@ -67,17 +152,26 @@ if (isset($_SESSION['manager'])) {
                     </label>
                     <input type="submit" name="submit" value="Request">
                     <input type="submit" name="submit" value="Cancel">
+                    <?php $employee->addHiddenInputs(); ?>
                 </form>
             </div>
         </div>
 
-        <br><br>
+        <div class="row-break"></div>
 
         <div class="container" id="previous-requests">
             <p>Previous Requests</p>
             <div class="scroll-area" id="previous-scroll">
+                <div class="request-div">
+                    <p> Requested Date </p>
+                    <p> Date of Request </p>
+                    <p> Request Status </p>
+                </div>
+                <?php echo $employee->populateRequests(false); ?>
             </div>
+
         </div>
+        <div class="row-break"></div>
     </div>
 
 

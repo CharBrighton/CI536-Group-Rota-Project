@@ -1,0 +1,54 @@
+#content {
+    color: white;
+}
+
+
+a {
+    color: #00ADB5;
+    text-align: center;
+}
+
+#header {
+    text-align: center;
+}
+#content {
+    background: #393E46;
+    width: 80vw;
+    margin: auto;
+}
+
+.scroll-area {
+    background: white;
+}
+
+.scroll-area p {
+    color: black;
+}
+
+.request-div {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0.5em;
+}
+
+.black_txt {
+    color: black;
+}
+
+.row-break {
+    height: 2vw;
+    background: #222831;
+}
+
+.pending-row {
+    background: #FFEA99;
+}
+
+.accepted-row {
+    background: #CCFFCC;
+}
+
+.declined-row {
+    background: #FFA896;
+}

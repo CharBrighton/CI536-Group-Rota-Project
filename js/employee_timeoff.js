@@ -1,6 +1,6 @@
 let current_date_int = Date.now()
 let current_date_obj = new Date(current_date_int);
-let current_user_id = 25; // TODO: Get ID Dynamically from master JS file (need to know which file that is)
+let current_user_id = 27; // TODO: Get ID Dynamically from master JS file (need to know which file that is)
 
 Date.prototype.ymd = function () {
     let y = this.getFullYear()
@@ -49,7 +49,7 @@ async function get_json() {
         }
     }
 
-    xhttp.open("GET", "./getRequests.php")
+    xhttp.open("GET", "../logic/get_all_timeoff_requests.php")
     xhttp.send()
 }
 
@@ -82,15 +82,15 @@ function insert_dates(json) {
         switch (request['RequestStatus']) {
             case '1':
                 requestStatusPara.innerHTML = "Accepted";
-                newDiv.setAttribute('class', append_class(newDiv, "accepted-column"));
+                newDiv.setAttribute('class', append_class(newDiv, "accepted-row"));
                 break;
             case '0':
                 requestStatusPara.innerHTML = "Pending";
-                newDiv.setAttribute('class', append_class(newDiv, "pending-column"));
+                newDiv.setAttribute('class', append_class(newDiv, "pending-row"));
                 break;
             case '-1':
                 requestStatusPara.innerHTML = "Declined";
-                newDiv.setAttribute('class', append_class(newDiv, "declined-column"));
+                newDiv.setAttribute('class', append_class(newDiv, "declined-row"));
                 break;
         }
 
