@@ -10,6 +10,14 @@ $id = $_SESSION['account_id'];
 
 function approve($bool, $conn, $url, $id)
 {
+    $output = "";
+
+    if (!isset($_POST['approve-checkbox'])) {
+        $output .= "No Request Selected <br>";
+        $output .= "<a href='" . $url . "'>Return</a>";
+        return $output;
+    }
+
     if ($bool) {
         $status = 1;
         $output_msg = "Accepted";
@@ -18,17 +26,18 @@ function approve($bool, $conn, $url, $id)
         $output_msg = "Declined";
     }
 
-    $requestDate = $_POST['approve-checkbox'];
+    $checkbox_values = explode(",", $_POST['approve-checkbox']);
     $sql = "UPDATE `timeoff_requests` SET `request_status` = '" . $status . "' 
-                                WHERE `shift_date` = '" . $requestDate. "' AND `employee_id` = " . $id;
+                                WHERE `shift_date` = '" . $checkbox_values[0] . "' AND `employee_id` = " . $checkbox_values[1];
 
     if ($conn->query($sql) === TRUE) {
-        echo "Request ". $output_msg .".<br>";
+        $output .= "Request ". $output_msg .".<br>";
     } else {
-        echo "Error: " . $sql . "<br>" . $conn->error;
+        $output .= "Error: " . $sql . "<br>" . $conn->error;
     }
 
-    echo "<a href='" . $url . "'>Return</a>";
+    $output .= "<a href='" . $url . "'>Return</a>";
+    return $output;
 }
 
 if ($_POST['submit'] == "Request") {
@@ -107,11 +116,11 @@ if ($_POST['submit'] == "Request") {
     echo "<a href='" . $url . "'>Return</a>";
 }
 elseif ($_POST['submit'] == "Accept") {
-    approve(true, $conn, $url, $id);
+    echo approve(true, $conn, $url, $id);
 }
 
 elseif ($_POST['submit'] == "Decline") {
-    approve(false, $conn, $url, $id);
+    echo approve(false, $conn, $url, $id);
 }
 
 else {

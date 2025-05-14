@@ -58,9 +58,10 @@ class Manager
                     }
 
                     $requested_date = $row['shift_date'];
+                    $checkbox_value = $requested_date . "," . $row['employee_id'];
 
                     $output .= '<div class="request-div pending-row '. $current_user_class .'" >';
-                    $output .= '<input value="' . $requested_date . '" name="approve-checkbox" type="radio" form="pending-form">';
+                    $output .= '<input value="' . $checkbox_value . '" name="approve-checkbox" type="radio" form="pending-form">';
             $output .= "<p> " . $row['employee_id'] . " </p>";
                     $output .= "<p> " . $requested_date . " </p>";
                     $output .= "<p> " . $row['request_date'] . " </p>";
