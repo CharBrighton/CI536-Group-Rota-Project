@@ -1,6 +1,9 @@
 <?php
 //hides errors showing on the page but keep commented out for dev purposes
 //error_reporting(0);
+global $conn;
+include "../conn/conn.php";
+session_start();
 if (!isset($_SESSION['account_loggedin'])) {
     header("location:index.php");
     exit;
@@ -9,8 +12,7 @@ if (!isset($_SESSION['manager'])) {
     header("location:employee_index.php");
 }
 
-global $conn;
-include "../conn/conn.php";
+
 ?>
 
 <!DOCTYPE html>
