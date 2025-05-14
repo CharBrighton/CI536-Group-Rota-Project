@@ -2,15 +2,41 @@
 include "../logic/today_date.php";
 include "../conn/conn.php";
 
+
 global $conn;
 $url = $_SERVER['HTTP_REFERER'];
+session_start();
+$id = $_SESSION['account_id'];
+
+function approve($bool, $conn, $url, $id)
+{
+    if ($bool) {
+        $status = 1;
+        $output_msg = "Accepted";
+    } else {
+        $status = -1;
+        $output_msg = "Declined";
+    }
+
+    $requestDate = $_POST['approve-checkbox'];
+    $sql = "UPDATE `timeoff_requests` SET `request_status` = '" . $status . "' 
+                                WHERE `shift_date` = '" . $requestDate. "' AND `employee_id` = " . $id;
+
+    if ($conn->query($sql) === TRUE) {
+        echo "Request ". $output_msg .".<br>";
+    } else {
+        echo "Error: " . $sql . "<br>" . $conn->error;
+    }
+
+    echo "<a href='" . $url . "'>Return</a>";
+}
 
 if ($_POST['submit'] == "Request") {
     if (strlen($_POST['requestedDate']) == 10) {
 
-        $id = $_POST['userID'];
+
         $requestDate = $_POST['requestedDate'];
-        $dateOfRequest = $_POST['currentDate'];
+        $dateOfRequest = today_date();
 
         $exist_sql = "SELECT * FROM timeoff_requests ";
         $exist_result = $conn->query($exist_sql);
@@ -64,7 +90,6 @@ if ($_POST['submit'] == "Request") {
 
 } elseif ($_POST['submit'] == "Cancel") {
     if (isset($_POST['cancel-checkbox'])) {
-        $id = $_POST['userID'];
         $date = $_POST['cancel-checkbox'];
 
         $sql = "        UPDATE `timeoff_requests` SET `request_status` = -2 
@@ -80,7 +105,16 @@ if ($_POST['submit'] == "Request") {
         echo "No Shift Selected to cancel. <br>";
     }
     echo "<a href='" . $url . "'>Return</a>";
-} else {
+}
+elseif ($_POST['submit'] == "Accept") {
+    approve(true, $conn, $url, $id);
+}
+
+elseif ($_POST['submit'] == "Decline") {
+    approve(false, $conn, $url, $id);
+}
+
+else {
     echo "Invalid Request <br>";
     echo "<a href='" . $url . "'>Return</a>";
 }

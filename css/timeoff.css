@@ -52,3 +52,7 @@ a {
 .declined-row {
     background: #FFA896;
 }
+
+.current-user {
+    background: #ffde71;
+}

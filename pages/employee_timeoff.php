@@ -16,24 +16,20 @@ if (isset($_SESSION['manager'])) {
 class Employee
 {
 
-    private $id;
+    private int $id;
 
     public function __construct()
     {
-        $this->setId(27); // TODO: Get Manager ID Dynamically
+        $this->setId($_SESSION['account_id']);
     }
 
-    public function setId($id)
+    public function setId($id): void
     {
         $this->id = $id;
     }
 
-    public function getId()
-    {
-        return $this->id;
-    }
 
-    private function statusValues($status)
+    private function statusValues($status): array
     {
         switch ($status) {
             case 0:
@@ -48,7 +44,7 @@ class Employee
     }
 
 
-    public function populateRequests($current)
+    public function populateRequests($current): string
     {
         global $conn;
 
@@ -78,13 +74,6 @@ class Employee
 
         return $output;
     }
-
-    public function addHiddenInputs()
-    {
-        $output = "<input type='hidden' name='currentDate' value='" . date("Y-m-d") . "'>";
-        $output .= "<input type='hidden' name='userID' value='" . $this->id . "'>";
-        echo $output;
-    }
 }
 
 $employee = new Employee();
@@ -98,9 +87,9 @@ $employee = new Employee();
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="../js/employee_timeoff.js"></script>
+    <script src="../js/timeoff.js"></script>
     <link href="../css/general_css.css" rel="stylesheet">
-    <link href="../css/employee_timeoff.css" rel="stylesheet">
+    <link href="../css/timeoff.css" rel="stylesheet">
 </head>
 
 <body>
@@ -146,13 +135,12 @@ $employee = new Employee();
             </div>
 
             <div class="submit_row">
-                <form action="../logic/employee_timeoff_logic.php" method="post" id="requestForm">
+                <form action="../logic/timeoff_logic.php" method="post" id="requestForm">
                     <label> Date requested:
                         <input type="date" id="inpAddRequest" name="requestedDate">
                     </label>
                     <input type="submit" name="submit" value="Request">
                     <input type="submit" name="submit" value="Cancel">
-                    <?php $employee->addHiddenInputs(); ?>
                 </form>
             </div>
         </div>
