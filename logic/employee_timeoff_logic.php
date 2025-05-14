@@ -1,4 +1,7 @@
 <?php
+include "../logic/today_date.php";
+include "../conn/conn.php";
+
 global $conn;
 
 if ($_POST['submit'] == "Request") {
@@ -39,24 +42,23 @@ if ($_POST['submit'] == "Request") {
 
                 if ($conn->query($sql) === TRUE) {
                     echo "Date Requested.<br>";
-                    echo "<a href='employee.html'>Return</a>";
                 } else {
                     echo "Error: " . $sql . "<br>" . $conn->error;
                 }
             }
 
-            echo "<br><a href='employee.html'>Return</a>";
+            echo "<br><a href='../pages/employee_index.php'>Return</a>";
         } else {
 
             echo $requestDate;
-            echo "<a href='employee.html'>Return</a>";
+            echo "<a href='../pages/employee_index.php'>Return</a>";
 
 
         }
 
     } else {
         echo "Error: No date selected. <br>";
-        echo "<a href='employee.html'>Return</a>";
+        echo "<a href='../pages/employee_index.php'>Return</a>";
     }
 
 } elseif ($_POST['submit'] == "Cancel") {
@@ -76,8 +78,8 @@ if ($_POST['submit'] == "Request") {
     } else {
         echo "No Shift Selected to cancel. <br>";
     }
-    echo "<a href='employee.html'>Return</a>";
+    echo "<a href='../pages/employee_index.php'>Return</a>";
 } else {
     echo "Invalid Request <br>";
-    echo "<a href='employee.html'>Return</a>";
+    echo "<a href='../pages/employee_index.php'>Return</a>";
 }

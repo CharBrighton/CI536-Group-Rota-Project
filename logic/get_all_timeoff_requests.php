@@ -1,4 +1,5 @@
 <?php
+include "../conn/conn.php";
 global $conn;
 
 if ($conn->connect_error) {
