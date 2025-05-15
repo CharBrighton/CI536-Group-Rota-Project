@@ -62,9 +62,6 @@ If you are above 120 and would like to make a complaint, contact an administrato
     displayError('Date is not valid!<br>Please enter a valid date.');
 }
 
-if (isset($_POST['date'])) {
-    displayError("Successful date");
-}
 
 $checked = isset($_POST['employeeType']) ? 1 : 0;
 
