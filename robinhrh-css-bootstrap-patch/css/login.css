@@ -1,0 +1,29 @@
+ 
+        
+
+        .login-form { /*Size of the login form adapts to the size of the screen. Max width set to prevent ugly/unneccesary stretching*/
+            max-width: 400px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .form-label { /*Password/Username Bold to stand out*/
+            font-weight: bold;
+        }
+    
+        .form-input { /*Scales size of the input fields, margin distances them from other elements, adds outline to fields*/
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        
+        .btn{ /*Same as above CSS, login button matchs size of the input fields - looks nicer and means the button is bigger and easier to press.*/
+            max-width: 400px;
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+         }
