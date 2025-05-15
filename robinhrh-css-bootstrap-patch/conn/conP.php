@@ -1,0 +1,7 @@
+<?php
+$DATABASE_HOST = '165.227.235.122';
+$DATABASE_USER = 'jf1005_phpAdmin';
+$DATABASE_PASS = 'pHpAdmin123';
+$DATABASE_NAME = 'jf1005_phpLogin';
+$con = mysqli_connect($DATABASE_HOST, $DATABASE_USER, $DATABASE_PASS, $DATABASE_NAME);
+?>
