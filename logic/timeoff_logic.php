@@ -132,3 +132,6 @@ else {  // No submit type matched: user accessed the file without posting a form
     echo "Invalid Request <br>";
     echo "<a href='" . $url . "'>Return</a>";
 }
+
+mysqli_close($conn);
+

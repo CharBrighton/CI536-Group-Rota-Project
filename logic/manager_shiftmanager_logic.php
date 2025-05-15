@@ -21,6 +21,8 @@ function return_current_shifts($date): void
         echo "<li>Name: $first_name $last_name Date: $shift_date Start: $start_time End: $end_time Break: $break_time</li>";
 
     }
+    mysqli_close($conn);
+
 }
 
 function add_person_to_date($date): void
@@ -71,6 +73,8 @@ if (isset($_POST['submit2'])) {
     } else {
         echo "Error: " . $sql . "<br>" . mysqli_error($conn);
     }
+    mysqli_close($conn);
+
 
 }
 
@@ -99,6 +103,9 @@ function people_available($date): void
         echo "<option value='$employee_id'>$first_name $last_name</option>";
 
     }
+
+    mysqli_close($conn);
+
 }
 
 ?>

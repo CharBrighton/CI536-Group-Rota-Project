@@ -19,4 +19,7 @@ function all_select(): void
         echo "<option value='$employee_id'>$first_name $last_name</option>";
 
     }
+
+    mysqli_close($conn);
+
 }
