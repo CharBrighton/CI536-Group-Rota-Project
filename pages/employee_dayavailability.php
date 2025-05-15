@@ -1,14 +1,61 @@
 <?php
-//hides errors showing on the page but keep commented out for dev purposes
-//error_reporting(0);
 session_start();
 if (!isset($_SESSION['account_loggedin'])) {
-    header("location:index.php");
+    header("Location: index.php");
     exit;
 }
 if (isset($_SESSION['manager'])) {
-    header("location:manager_index.php");
+    header("Location: manager_index.php");
+    exit;
 }
+
+include "../conn/conn.php";
+global $conn;
+$uid = $_SESSION['account_id']; // You can replace this with dynamic session user ID if needed
+
+// Process form submission before any output
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
+    // Use prepared statement for safer query
+    $stmt = $conn->prepare("UPDATE day_availability SET monday = ?, tuesday = ?, wednesday = ?, thursday = ?, friday = ?, saturday = ?, sunday = ? WHERE employee_id = ?");
+    if ($stmt === false) {
+        die("Prepare failed: " . htmlspecialchars($conn->error));
+    }
+
+    // Bind parameters as integers
+    $stmt->bind_param(
+        "iiiiiiii",
+        $_POST['Monday'],
+        $_POST['Tuesday'],
+        $_POST['Wednesday'],
+        $_POST['Thursday'],
+        $_POST['Friday'],
+        $_POST['Saturday'],
+        $_POST['Sunday'],
+        $uid
+    );
+
+    if ($stmt->execute()) {
+        $stmt->close();
+        // Redirect immediately after update
+        header('Location: employee_dayavailability.php');
+        exit;
+    } else {
+        echo "Error updating availability: " . htmlspecialchars($stmt->error);
+        $stmt->close();
+    }
+}
+
+// Fetch current availability to display checkboxes
+$sql = "SELECT monday, tuesday, wednesday, thursday, friday, saturday, sunday FROM day_availability WHERE employee_id = ?";
+$stmt = $conn->prepare($sql);
+if ($stmt === false) {
+    die("Prepare failed: " . htmlspecialchars($conn->error));
+}
+$stmt->bind_param("i", $uid);
+$stmt->execute();
+$stmt->bind_result($monday, $tuesday, $wednesday, $thursday, $friday, $saturday, $sunday);
+$stmt->fetch();
+$stmt->close();
 ?>
 
 <!DOCTYPE html>
@@ -32,19 +79,10 @@ if (isset($_SESSION['manager'])) {
             </button>
             <div class="collapse navbar-collapse" id="collapsibleNavbar">
                 <ul class="navbar-nav me-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="employee_rota.php">My Rota</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="employee_timeoff.php">Time Off</a>
-                    </li>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="employee_dayavailability.php">Day Availability</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="../logic/logout_logic.php">Log Out</a>
-                    </li>
+                    <li class="nav-item"><a class="nav-link" href="employee_rota.php">My Rota</a></li>
+                    <li class="nav-item"><a class="nav-link" href="employee_timeoff.php">Time Off</a></li>
+                    <li class="nav-item"><a class="nav-link" href="employee_dayavailability.php">Day Availability</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../logic/logout_logic.php">Log Out</a></li>
                 </ul>
             </div>
         </div>
@@ -53,86 +91,32 @@ if (isset($_SESSION['manager'])) {
     <div class="container-fluid">
         <h2>Current Availability</h2>
         <?php
-
-        $uid = 28;
-
-        global $conn;
-        include "../conn/conn.php";
-
-        $sql = "SELECT monday, tuesday, wednesday, thursday, friday, saturday, sunday FROM day_availability WHERE employee_id = $uid";
-        $result = mysqli_query($conn, $sql);
-        $row = mysqli_fetch_row($result);
-
-        $days = array('monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday');
-        $DAYS = array('Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday');
+        $days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'];
+        $DAYS = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+        $values = [$monday, $tuesday, $wednesday, $thursday, $friday, $saturday, $sunday];
 
         for ($i = 0; $i < 7; $i++) {
-            if ($row[$i] == 1) {
-                echo "<label for='$days[$i]'>$DAYS[$i]</label>";
-                echo "<input type='checkbox' name='$days[$i]' value='$days[$i]' style='pointer-events: none;' checked><br>";
-            } else {
-                echo "<label for='$days[$i]'>$DAYS[$i]</label>";
-                echo "<input type='checkbox' name='$days[$i]' value='$days[$i]' style='pointer-events: none;'><br>";
-            }
+            $checked = ($values[$i] == 1) ? 'checked' : '';
+            echo "<label for='{$days[$i]}'>{$DAYS[$i]}</label>";
+            echo "<input type='checkbox' name='{$days[$i]}' value='1' style='pointer-events: none;' $checked><br>";
         }
-
-
         ?>
     </div>
 
     <div class="container-fluid">
         <h2>New Availability</h2>
         <form method="POST">
-        <label for="monday">Monday</label>
-        <input type="hidden" id="Monday" name="Monday" value="0">
-        <input type="checkbox" id="Monday" name="Monday" value="1">
-
-        <label for="tuesday">Tuesday</label>
-        <input type="hidden" id="Tuesday" name="Tuesday" value="0">
-        <input type="checkbox" id="Tuesday" name="Tuesday" value="1">
-
-        <label for="wednesday">Wednesday</label>
-        <input type="hidden" id="Wednesday" name="Wednesday" value="0">
-        <input type="checkbox" id="Wednesday" name="Wednesday" value="1">
-
-        <label for="thursday">Thursday</label>
-        <input type="hidden" id="Thursday" name="Thursday" value="0">
-        <input type="checkbox" id="Thursday" name="Thursday" value="1">
-
-        <label for="friday">Friday</label>
-        <input type="hidden" id="Friday" name="Friday" value="0">
-        <input type="checkbox" id="Friday" name="Friday" value="1">
-
-        <label for="saturday">Saturday</label>
-        <input type="hidden" id="Saturday" name="Saturday" value="0">
-        <input type="checkbox" id="Saturday" name="Saturday" value="1">
-
-        <label for="sunday">Sunday</label>
-        <input type="hidden" id="Sunday" name="Sunday" value="0">
-        <input type="checkbox" id="Sunday" name="Sunday" value="1">
-
-        <input type="submit" value="Submit" name="submit">
+            <?php
+            for ($i = 0; $i < 7; $i++) {
+                // Hidden input to submit 0 if unchecked
+                echo "<label for='{$DAYS[$i]}'>{$DAYS[$i]}</label>";
+                echo "<input type='hidden' name='{$DAYS[$i]}' value='0'>";
+                echo "<input type='checkbox' id='{$DAYS[$i]}' name='{$DAYS[$i]}' value='1'><br>";
+            }
+            ?>
+            <input type="submit" value="Submit" name="submit">
         </form>
     </div>
-
-    <?php
-    if (isset($_POST['submit'])) {
-        $monday = $_POST['Monday'];
-        $tuesday = $_POST['Tuesday'];
-        $wednesday = $_POST['Wednesday'];
-        $thursday = $_POST['Thursday'];
-        $friday = $_POST['Friday'];
-        $saturday = $_POST['Saturday'];
-        $sunday = $_POST['Sunday'];
-
-        $sql = "UPDATE day_availability SET monday = '$monday', tuesday = '$tuesday', wednesday = '$wednesday', thursday = '$thursday', friday = '$friday', saturday = '$saturday', sunday = '$sunday' WHERE employee_id = '$uid'";
-        if (mysqli_query($conn, $sql)) {
-            header('Location: employee_dayavailability.php');
-        } else {
-            echo "Error: " . mysqli_error($conn);
-        }
-    }
-    ?>
 </div>
 </body>
 </html>

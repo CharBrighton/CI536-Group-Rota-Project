@@ -24,8 +24,7 @@ function employee_my_future_shifts($uid): void
         echo "<li>Date: $shift_date Start: $start_time End: $end_time Break: $break_time</li>";
 
     }
-    mysqli_free_result($result);
-    mysqli_close($conn);
+
 
 }
 
@@ -51,9 +50,6 @@ function employee_my_previous_shifts($uid): void
         echo "<li>Date: $shift_date Start: $start_time End: $end_time Break: $break_time</li>";
 
     }
-    mysqli_free_result($result);
-
-    mysqli_close($conn);
 
 }
 
@@ -72,10 +68,7 @@ function name($uid): void{
         $name = $row["first_name"] . " " . $row["last_name"];
         echo "Hello, $name!";
     }
-    mysqli_free_result($result);
 
-    mysqli_close($conn);
 
 }
-mysqli_close($conn);
 
