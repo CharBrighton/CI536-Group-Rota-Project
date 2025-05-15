@@ -10,7 +10,7 @@ Date.prototype.ymd = function () {  // creating method for Date class which retu
     if (d < 10) {  // Making single digit days have a leading zero for formatting
         d = `0${d}`
     }
-    console.log(d)
+
     return `${y}-${m}-${d}`  // Outputting formatted string
 }
 
