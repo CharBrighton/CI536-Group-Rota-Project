@@ -30,17 +30,18 @@ function add_person_to_date($date): void
     echo "
     <form method='POST'>
         <label for='person'>Select Person:</label>
-        <select name='employee_id' id='person'>
+        <select name='employee_id' id='person' required>
+        <option disabled selected value>Select Employee:</option>
             ";
     people_available($date);
     echo "
         </select>
         <label for='starttime'>Start Time:</label>
-        <input type='time' name='starttime' value=''>
+        <input type='time' name='starttime' value='' required>
         <label for='endtime'>End Time:</label>
-        <input type='time' name='endtime' value=''>
+        <input type='time' name='endtime' value='' required>
         <label for='breaktime'>Break Time:</label>
-        <input type='time' name='breaktime' value=''>
+        <input type='time' name='breaktime' value='' required>
         <label for='role'>Role:</label>
         <select name='role'>
             <option value='0'>Regular</option>
@@ -92,11 +93,15 @@ if (isset($_POST['submit2'])) {
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("issssi", $uid, $starttime, $endtime, $breaktime, $date, $role);
 
-    if ($stmt->execute()) {
-        echo '<script>alert("Shift successfully added!")</script>';
-    } else {
-        echo "Error: " . htmlspecialchars($stmt->error);
+    try {
+        if ($stmt->execute()) {
+            echo '<script>alert("Shift successfully added!")</script>';
+        } else {
+            echo "Error: " . htmlspecialchars($stmt->error);
+        }
+        $stmt->close();
+    } Catch (Exception $e) {
+        echo '<script>alert("Error: Employee already scheduled for date")</script>';
     }
-    $stmt->close();
 }
 ?>

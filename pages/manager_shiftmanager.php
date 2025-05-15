@@ -12,6 +12,7 @@ if (!isset($_SESSION['manager'])) {
 global $conn;
 include "../conn/conn.php";
 include "../logic/manager_shiftmanager_logic.php";
+$tomorrow = new DateTime('tomorrow')
 ?>
 
 <!DOCTYPE html>
@@ -65,7 +66,7 @@ include "../logic/manager_shiftmanager_logic.php";
     <div class="container-fluid">
         <form method="post">
             <label for="date">Select Date:</label>
-            <input type="date" id="date" name="date">
+            <input type="date" id="date" name="date"  min="<?php echo $tomorrow->format("Y-m-d") ?>" required>
             <input type="submit" name="submit" value="submit">
         </form>
 
