@@ -14,7 +14,7 @@ include "../conn/conn.php";
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-bs-theme="dark">
 <head>
     <title>Employee Home</title>
     <meta charset="utf-8">
@@ -26,7 +26,7 @@ include "../conn/conn.php";
 
 <body>
 <div class="wrapper">
-    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+    <nav class="navbar navbar-expand-sm bg-primary navbar-dark">
         <div class="container-fluid">
             <a class="navbar-brand" href="employee_index.php">Logo (Employee Portal)</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">

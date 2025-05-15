@@ -16,7 +16,7 @@ include '../logic/getshiftsforday.php';
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-bs-theme="dark">
 <head>
     <title>Full Rota</title>
     <meta charset="utf-8">
@@ -26,13 +26,14 @@ include '../logic/getshiftsforday.php';
     <link href="../css/rota.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../js/manager_rota.js"></script>
+    <script src="../js/manager_rota2.js"></script>
     <script src="../js/moment.js"></script>
 </head>
 
 <body>
 <div class="wrapper">
     <div class="topnav">
-        <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+        <nav class="navbar navbar-expand-sm bg-primary navbar-dark">
             <div class="container-fluid">
                 <a class="navbar-brand" href="manager_index.php">Logo (Manager Portal)</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">

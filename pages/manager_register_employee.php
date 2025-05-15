@@ -9,7 +9,7 @@ if(!isset($_SESSION['manager'])){
 }
 ?>
 <!DOCTYPE html>
-<html>
+<html data-bs-theme="dark">
 	<head>
 		<meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -20,7 +20,7 @@ if(!isset($_SESSION['manager'])){
 	</head>
 	<body>
     <div class="wrapper">
-    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+    <nav class="navbar navbar-expand-sm bg-primary navbar-dark">
         <div class="container-fluid">
             <a class="navbar-brand" href="manager_index.php">Logo (Manager Portal)</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
@@ -52,50 +52,50 @@ if(!isset($_SESSION['manager'])){
     </nav>
 
     <div class="login">
+        <div class="container-fluid">
+            <h1>Employee Register</h1>
 
-        <h1>Employee Register</h1>
+            <form action="../logic/register_logic.php" method="post" class="form login-form">
 
-        <form action="../logic/register_logic.php" method="post" class="form login-form">
+                <label class="form-label" for="username">Username</label>
+                <div class="form-group">
+                    <input class="form-input" type="text" name="username" placeholder="Username" id="username" required>
+                </div>
 
-            <label class="form-label" for="username">Username</label>
-            <div class="form-group">
-                <input class="form-input" type="text" name="username" placeholder="Username" id="username" required>
-            </div>
+                <label class="form-label" for="firstname">First Name</label>
+                <div class="form-group">
+                    <input class="form-input" type="text" name="firstname" placeholder="John" id="firstname" required>
+                </div>
+                <label class="form-label" for="lastname">Last Name</label>
+                <div class="form-group">
+                    <input class="form-input" type="text" name="lastname" placeholder="Smith" id="lastname" required>
+                </div>
+                <label class="form-label" for="firstname">Date of Birth</label>
+                <div class="form-group">
+                    <input class="form-input" type="date" name="date"  id="date" required>
+                </div>
+                <label class="form-label" for="email">Email</label>
+                <div class="form-group">
+                    <input class="form-input" type="email" name="email" placeholder="Email" id="email" required>
+                </div>
 
-            <label class="form-label" for="firstname">First Name</label>
-            <div class="form-group">
-                <input class="form-input" type="text" name="firstname" placeholder="John" id="firstname" required>
-            </div>
-            <label class="form-label" for="lastname">Last Name</label>
-            <div class="form-group">
-                <input class="form-input" type="text" name="lastname" placeholder="Smith" id="lastname" required>
-            </div>
-            <label class="form-label" for="firstname">Date of Birth</label>
-            <div class="form-group">
-                <input class="form-input" type="date" name="date"  id="date" required>
-            </div>
-            <label class="form-label" for="email">Email</label>
-            <div class="form-group">
-                <input class="form-input" type="email" name="email" placeholder="Email" id="email" required>
-            </div>
+                <label class="form-label" for="password">Password</label>
+                <div class="form-group">
+                    <input class="form-input" type="password" name="password" placeholder="Password" id="password" autocomplete="new-password" required>
+                </div>
+                <label class="form-label" for="emplyeeType">Check if manager</label>
+                <div class="form-group">
+                    <input class="form-input" type="checkbox" name="employeeType" id="employeetype" value="1">
+                </div>
 
-            <label class="form-label" for="password">Password</label>
-            <div class="form-group">
-                <input class="form-input" type="password" name="password" placeholder="Password" id="password" autocomplete="new-password" required>
-            </div>
-            <label class="form-label" for="emplyeeType">Check if manager</label>
-            <div class="form-group">
-                <input class="form-input" type="checkbox" name="employeeType" id="employeetype" value="1">
-            </div>
+                <label class="form-label" for="payrate">Pay Rate (in pence)</label>
+                <div class="form-group">
+                    <input class="form-input" type="text" name="payrate"  id="payrate" required>
+                </div>
+                <button class="btn btn-primary" type="submit">Register</button>
 
-            <label class="form-label" for="payrate">Pay Rate (in pence)</label>
-            <div class="form-group">
-                <input class="form-input" type="text" name="payrate"  id="payrate" required>
-            </div>
-            <button class="btn" type="submit">Register</button>
-
-        </form>
-
+            </form>
+        </div>
     </div>
     </div>
 	</body>

@@ -9,7 +9,7 @@ if (!isset($_SESSION['manager'])) {
 }
 ?>
 <!DOCTYPE html>
-<html>
+<html data-bs-theme="dark">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -20,7 +20,7 @@ if (!isset($_SESSION['manager'])) {
 </head>
 <body>
 <div class="wrapper">
-    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+    <nav class="navbar navbar-expand-sm bg-primary navbar-dark">
         <div class="container-fluid">
             <a class="navbar-brand" href="manager_index.php">Logo (Manager Portal)</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
@@ -95,7 +95,7 @@ if (!isset($_SESSION['manager'])) {
                 ?>
             </select>
 
-            <input type="submit" name="submit" value="submit">
+            <input type="submit"  name="submit" value="submit">
 
         </form>
 
@@ -105,6 +105,7 @@ if (!isset($_SESSION['manager'])) {
 
         if (isset($_POST['submit'])) {
             $uid = $_POST['employee_id'];
+
             $sql = "DELETE FROM day_availability WHERE employee_id = '$uid'";
             if (mysqli_query($conn, $sql)) {
                 $sql2 = "DELETE FROM employee WHERE employee_id = '$uid'";
@@ -118,7 +119,6 @@ if (!isset($_SESSION['manager'])) {
             }
 
             mysqli_close($conn);
-
 
         }
         ?>

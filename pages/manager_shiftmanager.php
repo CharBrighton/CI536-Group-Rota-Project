@@ -12,11 +12,10 @@ if (!isset($_SESSION['manager'])) {
 global $conn;
 include "../conn/conn.php";
 include "../logic/manager_shiftmanager_logic.php";
-$tomorrow = new DateTime('tomorrow')
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-bs-theme="dark">
 <head>
     <title>Manage Rota</title>
     <meta charset="utf-8">
@@ -29,7 +28,7 @@ $tomorrow = new DateTime('tomorrow')
 <body>
 <div class="wrapper">
     <div class="topnav">
-        <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+        <nav class="navbar navbar-expand-sm bg-primary navbar-dark">
             <div class="container-fluid">
                 <a class="navbar-brand" href="manager_index.php">Logo (Manager Portal)</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -66,7 +65,7 @@ $tomorrow = new DateTime('tomorrow')
     <div class="container-fluid">
         <form method="post">
             <label for="date">Select Date:</label>
-            <input type="date" id="date" name="date"  min="<?php echo $tomorrow->format("Y-m-d") ?>" required>
+            <input type="date" id="date" name="date">
             <input type="submit" name="submit" value="submit">
         </form>
 

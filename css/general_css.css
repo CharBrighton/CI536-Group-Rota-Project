@@ -6,5 +6,19 @@
 }
 
 .btn{
-    border-color: black;
+    max-width: 400px;
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
 }
+
+.form-input { /*Scales size of the input fields, margin distances them from other elements, adds outline to fields*/
+            width: 100%;
+            max-width: 400px;
+            padding: 10px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }

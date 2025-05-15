@@ -15,7 +15,7 @@ include "../conn/conn.php";
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-bs-theme="dark">
 <head>
     <title>Manager Home</title>
     <meta charset="utf-8">
@@ -28,7 +28,7 @@ include "../conn/conn.php";
 
 <body>
 <div class="wrapper">
-<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+<nav class="navbar navbar-expand-sm bg-primary navbar-dark">
     <div class="container-fluid">
         <a class="navbar-brand" href="manager_index.php">Logo (Manager Portal)</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
@@ -70,8 +70,8 @@ include "../conn/conn.php";
             <li>Use <strong>New Employee</strong> to set up an account for a new employee.</li>
             <li>Use <strong>My Employees</strong> to view all current employees, and delete old ones.</li>
             <li>Use <strong>My Rota</strong> to stay up to date with upcoming shifts and view your previous shifts.</li>
-            <li>Use<strong>Day Availability</strong> to show your preference so you can be scheduled when it works best.</li>
-            <li>Use<strong>Time Off</strong> to quickly and easily request time off with real time status updates.</li>
+            <li>Use <strong>Day Availability</strong> to show your preference so you can be scheduled when it works best.</li>
+            <li>Use <strong>Time Off</strong> to quickly and easily request time off with real time status updates.</li>
         </ul>
         <p>Whether you're planning ahead or making a last-minute change, the tools you need are right here.</p>
     </div>
