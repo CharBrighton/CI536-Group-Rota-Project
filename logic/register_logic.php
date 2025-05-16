@@ -1,32 +1,68 @@
 <?php
 
-
+function displayError($msg)
+{
+    echo  $msg;
+    exit("<br></b><a href='../pages/manager_register_employee.php'>Return</a>");
+}
 
 if (mysqli_connect_errno()) {
-    exit('Failed to connect to MySQL: ' . mysqli_connect_error());
+    displayError('Failed to connect to MySQL: ' . mysqli_connect_error());
+
 }
 
 if (!isset($_POST['username'], $_POST['password'], $_POST['email'])) {
     //FAILED
-    exit('Please complete the registration form!');
+    displayError('Please complete the registration form!');
 }
 //check if empty
 if (empty($_POST['username']) || empty($_POST['password']) || empty($_POST['email'])) {
     //is empty
-    exit('Please complete the registration form');
+    displayError('Please complete the registration form');
 }
 // Validate email address
 if (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
-	exit('Email is not valid!');
+    displayError('Email is not valid!');
 }
 // Validate password (between 5 and 20 characters long)
 if (strlen($_POST['password']) > 20 || strlen($_POST['password']) < 5) {
-	exit('Password must be between 5 and 20 characters long!');
+    displayError('Password must be between 5 and 20 characters long!');
 }
 // Validate username (must be alphanumeric)
 if (preg_match('/^[a-zA-Z0-9]+$/', $_POST['username']) == 0) {
-	exit('Username is not valid!');
+    displayError('Username is not valid!<br>Use only letters and numbers!');
+} elseif (strlen(trim($_POST['username'])) < 3  || strlen(trim($_POST['username'])) > 32) {
+    displayError('Username must be between 3 and 32 characters long (spaces at the start and end are removed)!');
 }
+
+// Validate pay rate is numeric
+try {
+    $int = (int) $_POST['payrate'];
+    if ($int != $_POST['payrate']) {
+        displayError('Decimal value is not valid! Pay Rate must be in pence!');
+    }
+} catch (Exception $e) {
+    displayError('Pay rate must be an integer.<br>Please enter your pay rate in pence.');
+}
+
+// Validate date of birth
+try {
+    $user_date = new DateTime($_POST['date']);
+    $upper = new DateTime("-120 years");
+    $lower = new DateTime("-16 years");
+
+    if ($user_date > $lower) {
+        displayError("Employee must be at least 16 years old.");
+    } elseif ($user_date < $upper) {
+        displayError('Employee must be under 120 years old.<br>
+If you are above 120 and would like to make a complaint, contact an administrator.');
+    }
+
+} catch (DateMalformedStringException $e) {
+    displayError('Date is not valid!<br>Please enter a valid date.');
+}
+
+
 $checked = isset($_POST['employeeType']) ? 1 : 0;
 
 pswrd($checked);

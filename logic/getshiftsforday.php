@@ -1,35 +1,33 @@
 <?php
-global $conn;
 include "../conn/conn.php";
 
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["date"])) {
-    $receivedVariable = $_POST["date"];
-    // Process the received variable here
-    $return = shifts($receivedVariable);
-    echo $return;
+if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["date"])) {
+    $date = $_POST["date"];
+    display_shifts_for_date($date);
 }
 
-function shifts($date): void
+function display_shifts_for_date($date): void
 {
-    //show saved names
     global $conn;
-    $get_shifts_sql = "SELECT first_name , last_name, start_time, end_time, break_time
-                        FROM employee
-                        INNER JOIN shifts
-                        ON employee.employee_id = shifts.employee_id
-                        WHERE shift_date = '$date' ";
-    $result = mysqli_query($conn, $get_shifts_sql);
 
-    while ($row = mysqli_fetch_assoc($result)) {
-        //get value associated with that row and column
-        $first_name = $row['first_name'];
-        $last_name = $row['last_name'];
-        $start_time = $row['start_time'];
-        $end_time = $row['end_time'];
-        $break_time = $row['break_time'];
+    $stmt = $conn->prepare("
+        SELECT first_name, last_name, start_time, end_time, break_time
+        FROM employee
+        INNER JOIN shifts ON employee.employee_id = shifts.employee_id
+        WHERE shift_date = ?
+    ");
+    $stmt->bind_param("s", $date);
+    $stmt->execute();
+    $result = $stmt->get_result();
 
-        echo "<p>$first_name $last_name Start: $start_time End: $end_time Break: $break_time</p>";
-
+    if ($result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+            echo "<p>{$row['first_name']} {$row['last_name']} Start: {$row['start_time']} End: {$row['end_time']} Break: {$row['break_time']}</p>";
+        }
+    } else {
+        echo "<p>No Shifts For This Date</p>";
     }
+
+    $stmt->close();
 }
 ?>

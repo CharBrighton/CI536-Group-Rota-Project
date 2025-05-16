@@ -26,7 +26,6 @@ include '../logic/getshiftsforday.php';
     <link href="../css/rota.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../js/manager_rota.js"></script>
-    <script src="../js/manager_rota2.js"></script>
     <script src="../js/moment.js"></script>
 </head>
 
