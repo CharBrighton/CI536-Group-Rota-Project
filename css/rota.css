@@ -64,3 +64,8 @@
 .buttons{
     text-align: center;
 }
+
+.current-day{
+    background: yellow;
+    color: black;
+}

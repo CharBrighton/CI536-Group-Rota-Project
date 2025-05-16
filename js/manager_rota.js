@@ -23,7 +23,7 @@ window.addEventListener('load', function () {
             }
 
             if (modifier === 0 && currentDay.toDateString() === today.toDateString()) {
-                document.getElementById(highlightIds[i])?.style.setProperty('background-color', 'yellow');
+                document.getElementById(highlightIds[i])?.classList.add('current-day');
             } else {
                 document.getElementById(highlightIds[i])?.style.removeProperty('background-color');
             }
